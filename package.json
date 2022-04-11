@@ -1,0 +1,45 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "product nodejs api",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "lint:fix": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix",
+    "test": "NODE_ENV=test mocha ./test/.js ./test//*.js --exit",
+    "lint:init": "./node_modules/.bin/eslint --init",
+    "coverage": "NODE_ENV=test nyc --reporter=json-summary --reporter=lcov --reporter=text --reporter=html --report-dir=./coverage npm test",
+    "nyc": "nyc --reporter=json-summary --reporter=text --reporter=html --report-dir=./coverage npm run test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run --silent lint:fix",
+      "git add"
+    ]
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.6.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-async-handler": "^1.1.4",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-rate-limit": "^5.3.0",
+    "helmet": "^3.23.3",
+    "hpp": "^0.2.3",
+    "mongoose": "^5.9.25",
+    "mongoose-url-slugs": "^1.0.2",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.2"
+  }
+}
