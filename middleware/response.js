@@ -1,4 +1,5 @@
 const Constant = require('../utilities/constant');
+const jwt=require("jsonwebtoken")
 
 const ResponseMiddleWare = {
   saveResponse: async (req, res) => {
@@ -48,5 +49,23 @@ const ResponseMiddleWare = {
       .status(500)
       .json({ success: false, error: Constant.labelList.serverError });
   },
+  verifyToken: async (req,res,next) => {
+    let authHeader = req.headers.autherization
+    if(authHeader==undefined){
+      res.status(404).send({error:"no token provided"})
+    }
+    let token=authHeader.split(" ").pop()
+    jwt.verify(token,process.env.SECRET_KEY,function(error,decoded){
+      if(error){
+        res.status(500).send({error:"authentification failed"})
+      }else{
+        //res.send(decoded)
+        next()
+      }
+    })
+
+
+  }
+
 };
 module.exports = ResponseMiddleWare;

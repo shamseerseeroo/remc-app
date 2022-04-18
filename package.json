@@ -7,7 +7,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "lint:fix": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix",
-    "test": "NODE_ENV=test mocha ./test/.js ./test//*.js --exit",
+    "test": "jest",
     "lint:init": "./node_modules/.bin/eslint --init",
     "coverage": "NODE_ENV=test nyc --reporter=json-summary --reporter=lcov --reporter=text --reporter=html --report-dir=./coverage npm test",
     "nyc": "nyc --reporter=json-summary --reporter=text --reporter=html --report-dir=./coverage npm run test"
@@ -26,6 +26,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
@@ -33,13 +34,25 @@
     "express-async-handler": "^1.1.4",
     "express-mongo-sanitize": "^2.1.0",
     "express-rate-limit": "^5.3.0",
+    "formidable": "^2.0.1",
     "helmet": "^3.23.3",
     "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
     "mongoose-url-slugs": "^1.0.2",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "jest": "^27.5.1",
     "mocha": "^9.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "transform": {
+    "\\.js$": "<rootDir>/node_modules/babel-jest"
   }
 }

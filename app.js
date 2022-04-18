@@ -10,10 +10,13 @@ const cors = require('cors');
 const routes = require('./routes');
 const pjson = require('./package.json');
 const Constant = require('./utilities/constant');
+const bodyParser = require('body-parser'); 
 const app = express();
 require('express-async-errors');
 
 
+
+app.use(bodyParser.urlencoded({ extended: false }));
 // App security header
 app.use(helmet());
 
@@ -56,6 +59,7 @@ app.get('/', (req, res) => {
   res.json({ version: pjson.version });
 });
 app.use('/api/v1', routes);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
