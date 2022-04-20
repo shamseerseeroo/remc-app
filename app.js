@@ -10,7 +10,8 @@ const cors = require('cors');
 const routes = require('./routes');
 const pjson = require('./package.json');
 const Constant = require('./utilities/constant');
-const fileUpload = require('express-fileupload');
+//const fileUpload = require('express-fileupload');
+const multer=require('multer')
 const bodyParser = require('body-parser'); 
 const app = express();
 require('express-async-errors');
@@ -18,7 +19,7 @@ require('express-async-errors');
  app.use(express.static(__dirname + '/public'));
 // app.use('/api/v1/profile', express.static('uploads'));
 
-app.use(fileUpload());
+//app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: false }));
 // App security header
 app.use(helmet());
