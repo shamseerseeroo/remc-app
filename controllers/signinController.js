@@ -19,7 +19,7 @@ const signin = {
   postdata: async (req, res, next) => {
     try {
       
-      const { email, password } = req.body
+      const { email, password , image} = req.body
          console.log(req.body)
       if (!(email && password)) {
         res.status(400).send("All input is required");
@@ -36,11 +36,11 @@ const signin = {
             }
           );
         User.token = token;
-        res.status(200).send({auth:true,token:token}).json(user);
+        res.status(200).send({auth:true,token:token});
           }
       
     
-    res.status(400).send("Invalid Credentials");
+    //res.status(400).send("Invalid Credentials");
   } catch(err) {
     console.log(err);
   }

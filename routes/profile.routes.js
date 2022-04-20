@@ -7,7 +7,7 @@ const profileController = require('../controllers/profileController');
 const middlewareReponse = require('../middleware/response');
 
 
-router.post('/', profileController.postdata,middlewareReponse.verifyToken);
+router.post('/', profileController.postdata, middlewareReponse.verifyToken);
 
 
-module.exports=router;
+module.exports = router;

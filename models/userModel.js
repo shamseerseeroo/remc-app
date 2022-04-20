@@ -15,6 +15,12 @@ var userSchema = new Schema(
       type: 'string',
       required: true
     },
+    image: {
+      type:String
+    }
+    
+      
+  
   
   },
   {
