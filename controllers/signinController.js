@@ -19,7 +19,7 @@ const signin = {
   postdata: async (req, res, next) => {
     try {
       
-      const { email, password , image} = req.body
+      const { email, password } = req.body
          console.log(req.body)
       if (!(email && password)) {
         res.status(400).send("All input is required");

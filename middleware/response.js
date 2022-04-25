@@ -50,11 +50,13 @@ const ResponseMiddleWare = {
       .json({ success: false, error: Constant.labelList.serverError });
   },
   verifyToken: async (req,res,next) => {
-    let authHeader = req.headers.autherization
+    let authHeader = req.headers.authorization
+    
     if(authHeader==undefined){
       res.status(404).send({error:"no token provided"})
     }
     let token=authHeader.split(" ").pop()
+    console.log(token)
     jwt.verify(token,process.env.SECRET_KEY,function(error,decoded){
       if(error){
         res.status(500).send({error:"authentification failed"})

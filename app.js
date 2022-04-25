@@ -16,8 +16,12 @@ const bodyParser = require('body-parser');
 const app = express();
 require('express-async-errors');
 
- app.use(express.static(__dirname + '/public'));
+app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
+
+ //app.use(express.static(__dirname + '/public'));
 // app.use('/api/v1/profile', express.static('uploads'));
+
 
 //app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: false }));

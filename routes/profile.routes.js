@@ -9,7 +9,10 @@ const multer  = require('multer')
 const upload = require("../middleware/upload")
 
 
-router.post('/', profileController.postdata,upload.single('image'), middlewareReponse.verifyToken);
+
+//router.post('/', profileController.postdata,upload.single('image'), middlewareReponse.verifyToken);
+router.post('/', upload.single('image'),profileController.profile);
+
 
 
 module.exports = router;

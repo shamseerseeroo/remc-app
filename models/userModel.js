@@ -4,7 +4,7 @@ var slugs = require('mongoose-url-slugs');
 
 var userSchema = new Schema(
   {
-    name: {
+    username: {
       type: 'string',
     },
     email: {

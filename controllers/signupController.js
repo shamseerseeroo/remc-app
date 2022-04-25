@@ -6,9 +6,12 @@ const commonMethods = require('../utilities/common');
 const signupService = new modelService(User);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+
 const jwt=require("jsonwebtoken")
 require("dotenv").config();
   
+
+
 const signup = {
 
     postdata: async (req,res, next) => {
@@ -24,10 +27,10 @@ const signup = {
             encryptedPassword = await bcrypt.hash(password, 10)
 
             const user = await signupService.create({
-                username,
+                username:username,
                 email:email.toLowerCase(),
                 password:encryptedPassword,
-
+                //image:req.file.filename
             });
         
             const token=jwt.sign(
@@ -36,7 +39,8 @@ const signup = {
                 {expiresIn:'2h'}
             )
             user.token=token
-            res.status(201).json(User)
+            return res.status(200).json(user)
+            console.log(user)
             
         }
         catch(err) {

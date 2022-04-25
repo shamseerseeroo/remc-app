@@ -20,7 +20,6 @@ const todoService = new modelService(todoModel);
 
 const todoApi = {
   createTodo: async (req, res, next) => {
-    console.log(req.body.name)
     res.data = await todoService.create(req.body);
     if (res.data) {
       return next();
