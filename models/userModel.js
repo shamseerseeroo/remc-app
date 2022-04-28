@@ -28,6 +28,6 @@ var userSchema = new Schema(
   }
 );
 
-userSchema.plugin(slugs('email'));
+userSchema.plugin(slugs('name'));
 
 module.exports = mongoose.model('User', userSchema);

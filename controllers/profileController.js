@@ -61,7 +61,9 @@ exports.profile = async (req,res) => {
 
           if(req.body.email){
               const oldUser = await User.findOne({ email: req.body.email })
-              if (oldUser) {
+              console.log(oldUser)
+              if(oldUser && oldUser._id != req.body._id){
+             // if (oldUser) {
                   return res.status(409).send("this user is already exist")
               }
           }
@@ -106,69 +108,7 @@ exports.profile = async (req,res) => {
      //       console.log(responsedata)
      //  })
      // }
-
-
-//     User.findOne({
-//          email: req.body.email
-//     },async function(err, userdata){
-//          if(err){
-//               res.json({
-//                    status:"error",
-//                    messege: err,
-//               });
-//          }else{
-//               console.log(userdata)
-//               if(userdata != null){
-//                    User.find({email:req.body.email},(err,emaildata)=>{
-//                          const emailexist = emaildata !== userdata.email
-//                          if(emaildata){
-//                               res.send("email already exist");
-
-//                          }else{
-//                               next()
-//                          }
-//                    })
-//               }
-//           }
-//      }
-//     )
-// }
-              
-
-     //     var update = User.findByIdAndUpdate(req.body.id,{
-
-     //          username:req.body.username,
-     //          email:req.body.email,
-     //          password:req.body.password,
-     //          image:req.file.filename
-     //     })
-     //     update.exec(function(err,data){
-     //          if (err) throw err
-     //          res.send("succesfully updated")
-
-              
-
-
-              
-     //     })
     
 
 
-     //     res.json({
-               //          status: "error",
-               //          messege: {
-               //               errmsg: "Email id Already Exist",
-               //               errorcode: 100
-               //          }
-               //     })
-
-                   
-               //     if(req.body.password){
-               //         encryptedPassword = await bcrypt.hash(password, 10)
-               //         const userdata={
-               //           username:req.body.username,
-               //           email:req.body.email,
-               //           password:req.encryptedPassword,
-               //           image:req.file.filename
-               //         }
-               //     }
+    
