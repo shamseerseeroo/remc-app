@@ -1,7 +1,7 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var { Schema } = mongoose;
 
-var pagesSchema = new Schema(
+var servicemanagmentSchema = new Schema(
     {
         title: {
             type: String,
@@ -12,22 +12,16 @@ var pagesSchema = new Schema(
             required: true,
             index: true
         },
+        sortOrder: {
+            type: Number,
+            default: "",
+          },
         Image: {
             type: String,
             required: false,
             default: null
         },
         status: {
-            type: Boolean,
-            default: false
-        },
-
-        slug: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        delstatus: {
             type: Boolean,
             default: false
         },

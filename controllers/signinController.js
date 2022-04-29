@@ -31,12 +31,13 @@ const signin = {
           const token = jwt.sign(
             { user_id: user._id, email: user.email },
             process.env.SECRET_KEY, 
-            {
+            {                                                                                                                         
+
               expiresIn: "2h",
             }
           );
         User.token = token;
-        res.status(200).send({auth:true,token:token});
+        res.status(200).send({auth:true,token:token,user_id:user._id,username:user.username});
           }
       
     
