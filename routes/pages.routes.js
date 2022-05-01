@@ -3,7 +3,7 @@ const router = express.Router();
 const pagesController = require('../controllers/pagesController');
 const middlewareReponse = require('../middleware/response');
 const multer  = require('multer')
-const upload = require("../middleware/upload")
+const upload = require("../middleware/pageupload")
 
 
 //create

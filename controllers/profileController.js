@@ -5,7 +5,7 @@ require('express-async-errors');
 const modelService = require('../services/modelService');
 const User = require('../models/userModel');
 const commonMethods = require('../utilities/common');
-//const profileService = new modelService(Profile);
+const profileService = new modelService(User);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs')
 //const dotenv = require('dotenv');
@@ -79,7 +79,28 @@ exports.profile = async (req,res) => {
            }
       } catch (error) {
            console.log(error)      }
+           
      }
+exports.getuser=async (req,res,next)=>{
+        console.log(req.params.id)
+       const userdata =await User.findOne({_id:req.params.id},(err,result)=>{
+             console.log(result)
+             if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                }); 
+            } else {
+                res.json({
+                    status: "success",
+                    message: 'user details loading..',
+                    data: result
+                });
+            }
+       })
+    }
+
+
      //  User.findOne({email:req.body.email},function(err,userdata){
      //       if(userdata){
      //            res.send("this email is already exist");

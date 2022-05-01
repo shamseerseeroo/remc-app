@@ -11,6 +11,7 @@ router.use("/signup",postdata)
 
 router.use("/signin", postData);
 router.use("/profile",require('./profile.routes'))
+router.use("/servicemanagment",require('./servicemanagment.routes'))
 router.use("/pages",require('./pages.routes.js'))
 
 router.use((err, req, res) => {
