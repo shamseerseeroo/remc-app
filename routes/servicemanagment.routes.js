@@ -9,7 +9,13 @@ const multer  = require('multer')
 const upload = require("../middleware/upload")
 
 
-router.post('/', servicemanagmentController.create);
+
+//create
+router.post('/', upload.single('Image'),middlewareReponse.verifyToken, servicemanagmentController.create,middlewareReponse.saveResponse);
+//update
+router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,servicemanagmentController.updatepage, middlewareReponse.updateResponse);
+router.delete('/:id', middlewareReponse.verifyToken,servicemanagmentController.deletepage, middlewareReponse.deleteResponse);
+
 
 
 

@@ -7,11 +7,11 @@ const upload = require("../middleware/pageupload")
 
 
 //create
-router.post('/', upload.single('Image'),pagesController.create,middlewareReponse.saveResponse);
+router.post('/', upload.single('Image'),middlewareReponse.verifyToken,pagesController.create,middlewareReponse.saveResponse);
 //update
-router.put('/:id',upload.single('Image'),pagesController.updatepage, middlewareReponse.updateResponse);
-router.delete('/:id', pagesController.deletepage, middlewareReponse.deleteResponse);
-router.get('/:slug',upload.single('Image'),pagesController.getpage, middlewareReponse.getByIdResponse);
+router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,pagesController.updatepage, middlewareReponse.updateResponse);
+router.delete('/:id',middlewareReponse.verifyToken, pagesController.deletepage, middlewareReponse.deleteResponse);
+router.get('/:slug',upload.single('Image'),middlewareReponse.verifyToken,pagesController.getpage, middlewareReponse.getByIdResponse);
 
 
 
