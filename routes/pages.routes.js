@@ -12,6 +12,7 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken,pagesContr
 router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,pagesController.updatepage, middlewareReponse.updateResponse);
 router.delete('/:id',middlewareReponse.verifyToken, pagesController.deletepage, middlewareReponse.deleteResponse);
 router.get('/:slug',upload.single('Image'),middlewareReponse.verifyToken,pagesController.getpage, middlewareReponse.getByIdResponse);
+router.get('/id/:id',middlewareReponse.verifyToken,pagesController.getpagebyid);
 
 
 

@@ -62,6 +62,7 @@ exports.profile = async (req,res) => {
           if(req.body.email){
               const oldUser = await User.findOne({ email: req.body.email })
               console.log(oldUser)
+              console.log(req.body._id)
               if(oldUser && oldUser._id != req.body._id){
              // if (oldUser) {
                   return res.status(409).send("this user is already exist")

@@ -33,7 +33,7 @@ const signin = {
             process.env.SECRET_KEY, 
             {                                                                                                                         
 
-              expiresIn: "2h",
+              expiresIn: "4h",
             }
           );
         User.token = token;

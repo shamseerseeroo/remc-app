@@ -6,7 +6,7 @@ const router = express.Router();
 const servicemanagmentController = require('../controllers/servicemanagmentController');
 const middlewareReponse = require('../middleware/response');
 const multer  = require('multer')
-const upload = require("../middleware/upload")
+const upload = require("../middleware/serviceupload")
 
 
 
