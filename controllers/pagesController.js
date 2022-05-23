@@ -6,6 +6,7 @@ const commonMethods = require('../utilities/common');
 const pagesService = new modelService(pages);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const upload = require('../middleware/pageupload');
 
 
 exports.create = async (req, res, next) => {
@@ -100,14 +101,15 @@ exports.getpage = async (req, res, next) => {
 }
 
 exports.getpagebyid = async (req, res, next) => {
-  console.log(req.params.slug);
-  console.log("welcome to bombae")
   const pagesdata = await pages.findOne({ _id: req.params.id }, (err, result) => {
+    
+    console.log(result.Image)
+    result.Image = './upload/pages/'+result.Image
+    console.log(result.Image)
     console.log(result)
     if (err) {
       consosle.log(err)
-      res.json({
-        status: "error",
+      res.json({        status: "error",
         message: err,
       });
     } else {
