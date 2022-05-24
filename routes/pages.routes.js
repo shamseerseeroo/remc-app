@@ -17,5 +17,4 @@ router.get('/id/:id',middlewareReponse.verifyToken,pagesController.getpagebyid);
 
 
 
-
 module.exports = router;
