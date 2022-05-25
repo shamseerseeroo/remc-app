@@ -16,6 +16,8 @@ exports.create = async (req, res, next) => {
     Image: req.file.filename,
     createdby: req.body.email
   });
+  console.log(req.body);
+  console.log(res.data)
   if (res.data) {
     return next();
   }
@@ -78,17 +80,32 @@ exports.deletepage = async (req, res, next) => {
 
 }
 exports.getpage = async (req, res, next) => {
-  let id = req.query.id
-  let slug = req.query.slug
-    const filterResponse = await commonMethods.filterResponse(req.query);
+  //     const filterResponse = await commonMethods.filterResponse(req.query);
 
-    const pageRes = await pagesService.getAll(filterResponse);
-    const totalCount = await pagesService.totalCount();
-    if (pageRes) {
+  //     const pageRes = await pagesService.getAll(filterResponse);
+  //     const totalCount = await pagesService.totalCount();
+  //     if (pageRes) {
 
+  //       const response = {
+  //         count: totalCount,
+  //         data: pageRes,
+  //       };
+  //       res.data = response;
+
+  //       return next();
+  //     } else {
+  //       debug('Error occured while fetching all pages');
+  //       throw new Error();
+  //     }
+
+  // }
+  const totalCount = await pagesService.totalCount();
+  const data = await pages.find({ slug: req.query.slug, delstatus: false }, (err, result) => {
+    console.log(result);
+    if (result) {
       const response = {
         count: totalCount,
-        data: pageRes,
+        data: result,
       };
       res.data = response;
 
@@ -97,19 +114,20 @@ exports.getpage = async (req, res, next) => {
       debug('Error occured while fetching all pages');
       throw new Error();
     }
-
-}
+  })
+        }
 
 exports.getpagebyid = async (req, res, next) => {
   const pagesdata = await pages.findOne({ _id: req.params.id }, (err, result) => {
-    
+
     console.log(result.Image)
-    result.Image = "http://localhost:3000/pages/"+result.Image 
-       console.log(result.Image)
+    result.Image = "http://localhost:3000/pages/" + result.Image
+    console.log(result.Image)
     console.log(result)
     if (err) {
       consosle.log(err)
-      res.json({        status: "error",
+      res.json({
+        status: "error",
         message: err,
       });
     } else {

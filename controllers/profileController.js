@@ -85,7 +85,9 @@ exports.profile = async (req,res) => {
 exports.getuser=async (req,res,next)=>{
         console.log(req.params.id)
        const userdata =await User.findOne({_id:req.params.id},(err,result)=>{
-             console.log(result)
+             console.log(result.image)
+             result.image="http://localhost:3000/profile/"+result.image 
+
              if (err) {
                 res.json({
                     status: "error",

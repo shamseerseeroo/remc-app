@@ -91,6 +91,28 @@ exports.deletepage = async (req, res, next) => {
   //       throw new Error();
   //     }
   //   }
+  exports.getpagebyid = async (req, res, next) => {
+    const pagesdata = await pages.findOne({ _id: req.params.id }, (err, result) => {
+      
+      console.log(result.Image)
+      result.Image = "http://localhost:3000/pages/"+result.Image 
+         console.log(result.Image)
+      console.log(result)
+      if (err) {
+        consosle.log(err)
+        res.json({        status: "error",
+          message: err,
+        });
+      } else {
+        res.json({
+          status: "success",
+          message: 'pages details loading..',
+          data: result
+        });
+      }
+    })
+  }
+
 
 
 

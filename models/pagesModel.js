@@ -11,7 +11,6 @@ var pagesSchema = new Schema(
         description: {
             type: String,
             required: true,
-            index: true
         },
         Image: {
             type: String,
