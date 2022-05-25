@@ -104,8 +104,8 @@ exports.getpagebyid = async (req, res, next) => {
   const pagesdata = await pages.findOne({ _id: req.params.id }, (err, result) => {
     
     console.log(result.Image)
-    result.Image = 'http://localhost:3000/api/v1/pages/upload/pages/'+result.Image
-    console.log(result.Image)
+    result.Image = "http://localhost:3000/pages/"+result.Image 
+       console.log(result.Image)
     console.log(result)
     if (err) {
       consosle.log(err)
