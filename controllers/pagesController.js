@@ -100,7 +100,7 @@ exports.getpage = async (req, res, next) => {
 
   // }
   const totalCount = await pagesService.totalCount();
-  const data = await pages.find({ slug: req.query.slug, delstatus: false }, (err, result) => {
+  const data = await pages.find({ delstatus: false }, (err, result) => {
     console.log(result);
     if (result) {
       const response = {
