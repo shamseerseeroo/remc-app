@@ -16,6 +16,10 @@ var servicemanagmentSchema = new Schema(
             type: Number,
             default: "",
           },
+        delstatus: {
+            type: Boolean,
+            default: false
+          },
         Image: {
             type: String,
             required: false,

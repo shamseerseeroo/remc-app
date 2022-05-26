@@ -113,11 +113,10 @@ exports.deletepage = async (req, res, next) => {
     })
   }
   exports.getpage = async (req, res, next) => {
-    const data = await Service.find({ delstatus: false }, (err, result) => {
+    const data = await servicemanagment.find({ delstatus: false }, (err, result) => {
       console.log(result);
       if (result) {
         const response = {
-          count: totalCount,
           data: result,
         };
         res.data = response;
