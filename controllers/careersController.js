@@ -1,15 +1,15 @@
 require('express-async-errors');
 const modelService = require('../services/modelService');
 const dotenv = require('dotenv');
-const servicemanagment = require('../models/servicemanagmentModel');
+const Careers = require('../models/careersModel');
 const commonMethods = require('../utilities/common');
-const Service = new modelService(servicemanagment);
+const careersService = new modelService(Careers);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
 
 exports.create = async (req, res, next) => {
-  res.data = await Service.create({
+  res.data = await careersService.create({
     title: req.body.title,
     description: req.body.description,
     Image: req.file.filename,
@@ -29,7 +29,7 @@ exports.updatepage = async (req, res, next) => {
     Image: req.file.filename
   }
   console.log(updateData)
-  res.data = await Service.updateOne(updateData, req.params.id);
+  res.data = await Careers.updateOne(updateData, req.params.id);
   if (res.data) {
     return next();
   } else {
@@ -39,7 +39,7 @@ exports.updatepage = async (req, res, next) => {
 }
 exports.deletepage = async (req, res, next) => {
   console.log(req.params.id)
-  const data = await servicemanagment.findById(req.params.id, function (err, ditItem) {
+  const data = await Careers.findById(req.params.id, function (err, ditItem) {
     if (!ditItem) {
       res.json({
         status: "error",
@@ -92,10 +92,10 @@ exports.deletepage = async (req, res, next) => {
   //     }
   //   }
   exports.getpagebyid = async (req, res, next) => {
-    const servicedata = await servicemanagment.findOne({ _id: req.params.id }, (err, result) => {
+    const pagesdata = await Careers.findOne({ _id: req.params.id }, (err, result) => {
       
       console.log(result.Image)
-      result.Image = "http://localhost:3000/service/"+result.Image 
+      result.Image = "http://localhost:3000/careers/"+result.Image 
          console.log(result.Image)
       console.log(result)
       if (err) {
@@ -113,7 +113,7 @@ exports.deletepage = async (req, res, next) => {
     })
   }
   exports.getpage = async (req, res, next) => {
-    const data = await Service.find({ delstatus: false }, (err, result) => {
+    const data = await Careers.find({ delstatus: false }, (err, result) => {
       console.log(result);
       if (result) {
         const response = {
@@ -129,11 +129,3 @@ exports.deletepage = async (req, res, next) => {
       }
     })
           }
-
-
-
-
-
-  // });
-
-//}

@@ -15,7 +15,7 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken, servicema
 //update
 router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,servicemanagmentController.updatepage, middlewareReponse.updateResponse);
 router.delete('/:id', middlewareReponse.verifyToken,servicemanagmentController.deletepage, middlewareReponse.deleteResponse);
-
+router.get('/:slug',upload.single('Image'),middlewareReponse.verifyToken,servicemanagmentController.getpage, middlewareReponse.getByIdResponse);
 
 
 
