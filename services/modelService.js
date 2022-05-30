@@ -54,8 +54,10 @@ class ModelService {
   updateOne(data, id) {
     return this.Model.updateOne({ _id: id }, { $set: { data } })
       .then((result) => result)
+      
       .catch((err) => err);
   }
+
 
   /**
    * Update one record by doucment ID.
@@ -78,5 +80,6 @@ class ModelService {
       .then((data) => data)
       .catch((err) => err);
   }
+  
 }
 module.exports = ModelService;

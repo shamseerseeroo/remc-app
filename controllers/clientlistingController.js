@@ -1,19 +1,18 @@
 require('express-async-errors');
 const modelService = require('../services/modelService');
 const dotenv = require('dotenv');
-const servicemanagment = require('../models/servicemanagmentModel');
+const Clientlisting = require('../models/clientlistingModel');
 const commonMethods = require('../utilities/common');
-const Service = new modelService(servicemanagment);
+const clientlistingService = new modelService(Clientlisting);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
 
 exports.create = async (req, res, next) => {
-  res.data = await Service.create({
-    title: req.body.title,
+  res.data = await clientlistingService.create({
+    name: req.body.name,
     description: req.body.description,
     Image: req.file.filename,
-    createdby: req.body.email,
     sortorder: req.body.sortorder,
     status: req.body.status
   });
@@ -29,7 +28,7 @@ exports.updatepage = async (req, res, next) => {
     Image: req.file.filename
   }
   console.log(updateData)
-  res.data = await Service.updateOne(updateData, req.params.id);
+  res.data = await Clientlisting.updateOne(updateData, req.params.id);
   if (res.data) {
     return next();
   } else {
@@ -39,7 +38,7 @@ exports.updatepage = async (req, res, next) => {
 }
 exports.deletepage = async (req, res, next) => {
   console.log(req.params.id)
-  const data = await servicemanagment.findById(req.params.id, function (err, ditItem) {
+  const data = await Clientlisting.findById(req.params.id, function (err, ditItem) {
     if (!ditItem) {
       res.json({
         status: "error",
@@ -92,15 +91,15 @@ exports.deletepage = async (req, res, next) => {
   //     }
   //   }
   exports.getpagebyid = async (req, res, next) => {
-    const servicedata = await servicemanagment.findOne({ _id: req.params.id }, (err, result) => {
+    const pagesdata = await Clientlisting.findOne({ _id: req.params.id }, (err, result) => {
       
       console.log(result.Image)
-      result.Image = "http://localhost:3000/service/"+result.Image 
+      result.Image = "http://localhost:3000/clientlisting/"+result.Image 
          console.log(result.Image)
       console.log(result)
       if (err) {
         consosle.log(err)
-        res.json({      
+        res.json({       
           status: "error",
           message: err,
         });
@@ -114,10 +113,11 @@ exports.deletepage = async (req, res, next) => {
     })
   }
   exports.getpage = async (req, res, next) => {
-    const data = await servicemanagment.find({ delstatus: false }, (err, result) => {
+    const data = await Clientlisting.find({ delstatus: false }, (err, result) => {
       console.log(result);
       if (result) {
         const response = {
+          count: totalCount,
           data: result,
         };
         res.data = response;
@@ -129,11 +129,3 @@ exports.deletepage = async (req, res, next) => {
       }
     })
           }
-
-
-
-
-
-  // });
-
-//}
