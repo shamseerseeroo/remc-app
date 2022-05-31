@@ -11,6 +11,6 @@ router.post('/',middlewareReponse.verifyToken, contactusController.create,middle
 //update
 router.put('/:id',middlewareReponse.verifyToken,contactusController.updatecontactus, middlewareReponse.updateResponse);
 router.delete('/:id', middlewareReponse.verifyToken,contactusController.deletecontactus, middlewareReponse.deleteResponse);
-router.get('/:slug',middlewareReponse.verifyToken,contactusController.getcontactus, middlewareReponse.getByIdResponse);
+router.get('/',middlewareReponse.verifyToken,contactusController.getcontactus, middlewareReponse.getByIdResponse);
 
 module.exports=router;

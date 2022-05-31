@@ -15,7 +15,7 @@ router.post('/', upload.single('Image'),middlewareResponse.verifyToken, clientli
 //update
 router.put('/:id',upload.single('Image'),middlewareResponse.verifyToken,clientlistingController.updateclientlisting, middlewareResponse.updateResponse);
 router.delete('/:id', middlewareResponse.verifyToken,clientlistingController.deleteclientlisting, middlewareResponse.deleteResponse);
-router.get('/:slug',upload.single('Image'),middlewareResponse.verifyToken,clientlistingController.getclientlisting, middlewareResponse.getByIdResponse);
+router.get('/',upload.single('Image'),middlewareResponse.verifyToken,clientlistingController.getclientlisting, middlewareResponse.getByIdResponse);
 
 
 

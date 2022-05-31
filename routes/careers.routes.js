@@ -13,6 +13,6 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken, careersCo
 //update
 router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,careersController.updatecareer, middlewareReponse.updateResponse);
 router.delete('/:id', middlewareReponse.verifyToken,careersController.deletecareer, middlewareReponse.deleteResponse);
-router.get('/:slug',upload.single('Image'),middlewareReponse.verifyToken,careersController.getcareer, middlewareReponse.getByIdResponse);
+router.get('/',upload.single('Image'),middlewareReponse.verifyToken,careersController.getcareer, middlewareReponse.getByIdResponse);
 
 module.exports=router;

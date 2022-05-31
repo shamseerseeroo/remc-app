@@ -12,9 +12,9 @@ var servicemanagmentSchema = new Schema(
             required: true,
             index: true
         },
-        sortOrder: {
+        sortorder: {
             type: Number,
-            default: "",
+            default: null
         },
         slug: {
             type: String,

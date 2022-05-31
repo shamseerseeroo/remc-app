@@ -114,7 +114,7 @@ exports.deleteservice = async (req, res, next) => {
 //   }
 exports.getservicebyid = async (req, res, next) => {
   const servicedata = await servicemanagment.findOne({ _id: req.params.id }, (err, result) => {
-
+     
     console.log(result.Image)
     result.Image = "http://localhost:3000/service/" + result.Image
     console.log(result.Image)
@@ -128,7 +128,7 @@ exports.getservicebyid = async (req, res, next) => {
     } else {
       res.json({
         status: "success",
-        message: 'pages details loading..',
+        message: 'service details loading..',
         data: result
       });
     }
