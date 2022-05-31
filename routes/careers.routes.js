@@ -11,8 +11,8 @@ const upload = require("../middleware/careersupload")
 //create
 router.post('/', upload.single('Image'),middlewareReponse.verifyToken, careersController.create,middlewareReponse.saveResponse);
 //update
-router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,careersController.updatepage, middlewareReponse.updateResponse);
-router.delete('/:id', middlewareReponse.verifyToken,careersController.deletepage, middlewareReponse.deleteResponse);
-router.get('/:slug',upload.single('Image'),middlewareReponse.verifyToken,careersController.getpage, middlewareReponse.getByIdResponse);
+router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,careersController.updatecareer, middlewareReponse.updateResponse);
+router.delete('/:id', middlewareReponse.verifyToken,careersController.deletecareer, middlewareReponse.deleteResponse);
+router.get('/:slug',upload.single('Image'),middlewareReponse.verifyToken,careersController.getcareer, middlewareReponse.getByIdResponse);
 
 module.exports=router;

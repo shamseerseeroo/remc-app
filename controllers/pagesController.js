@@ -27,18 +27,20 @@ exports.create = async (req, res, next) => {
 }
 exports.updatepage = async (req, res, next) => {
   pages.findById(req.params.id, (err, updateItem) => {
+    
     if (err) {
         res.json({
             status: "error",
             message: err,
         });
-    } else {
+    } else {   
+      
         updateItem.title = req.body.title;
         updateItem.description = req.body.description;
         updateItem.updateddate = new Date();
         updateItem.Image = req.file.filename
         updateItem.description = req.body.description;
-
+      
         updateItem.save((err) => {
 
             if (err) {

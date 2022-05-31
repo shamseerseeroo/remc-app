@@ -23,21 +23,41 @@ exports.create = async (req, res, next) => {
   debug('Error occured while saving  data');
   throw new Error();
 }
-exports.updatepage = async (req, res, next) => {
-  const updateData = {
-    ...req.body,
-    Image: req.file.filename
+exports.updateservice = async (req, res, next) => {
+  servicemanagment.findById(req.params.id, (err, updateItem) => {
+    if (err) {
+        res.json({
+            status: "error",
+            message: err,
+        });
+    } else {
+        updateItem.title = req.body.title;
+        updateItem.description = req.body.description;
+        updateItem.updateddate = new Date();
+        updateItem.Image = req.file.filename
+        updatedItem.sortorder = req.body.sortorder
+
+        updateItem.save((err) => {
+
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            } else {
+                res.json({
+                    status: "success",
+                    message: 'Updated Successfully',
+                    data: updateItem
+                });
+            }
+
+        });
+    }
+
   }
-  console.log(updateData)
-  res.data = await Service.updateOne(updateData, req.params.id);
-  if (res.data) {
-    return next();
-  } else {
-    debug('Error occured while updating service');
-    throw new Error();
-  }
-}
-exports.deletepage = async (req, res, next) => {
+)}
+exports.deleteservice = async (req, res, next) => {
   console.log(req.params.id)
   const data = await servicemanagment.findById(req.params.id, function (err, ditItem) {
     if (!ditItem) {
@@ -91,7 +111,7 @@ exports.deletepage = async (req, res, next) => {
   //       throw new Error();
   //     }
   //   }
-  exports.getpagebyid = async (req, res, next) => {
+  exports.getservicebyid = async (req, res, next) => {
     const servicedata = await servicemanagment.findOne({ _id: req.params.id }, (err, result) => {
       
       console.log(result.Image)
@@ -113,7 +133,7 @@ exports.deletepage = async (req, res, next) => {
       }
     })
   }
-  exports.getpage = async (req, res, next) => {
+  exports.getservice = async (req, res, next) => {
     const data = await servicemanagment.find({ delstatus: false }, (err, result) => {
       console.log(result);
       if (result) {

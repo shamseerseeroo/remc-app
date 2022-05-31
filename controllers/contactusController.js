@@ -1,21 +1,18 @@
 require('express-async-errors');
 const modelService = require('../services/modelService');
 const dotenv = require('dotenv');
-const Careers = require('../models/careersModel');
+const Contactus = require('../models/contactusModel');
 const commonMethods = require('../utilities/common');
-const careersService = new modelService(Careers);
+const contactusService = new modelService(Contactus);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
 
 exports.create = async (req, res, next) => {
-  res.data = await careersService.create({
-    title: req.body.title,
-    description: req.body.description,
-    Image: req.file.filename,
-    createdby: req.body.email,
-    sortorder: req.body.sortorder,
-    status: req.body.status
+  res.data = await contactusService.create({
+    email: req.body.email,
+    phonenumber: req.body.phonenumber,
+    address: req.body.address,
   });
   if (res.data) {
     return next();
@@ -23,23 +20,19 @@ exports.create = async (req, res, next) => {
   debug('Error occured while saving  data');
   throw new Error();
 }
-exports.updatecareer = async (req, res, next) => {
-  Careers.findById(req.params.id, (err, updateItem) => {
-    
+exports.updatecontactus = async (req, res, next) => {
+    Contactus.findById(req.params.id, (err, updateItem) => {
     if (err) {
         res.json({
             status: "error",
             message: err,
         });
-    } else {   
-      
-        updateItem.title = req.body.title;
-        updateItem.description = req.body.description;
+    } else {
+        updateItem.email = req.body.email;
+        updateItem.phonenumber = req.body.phonenumber;
         updateItem.updateddate = new Date();
-        updateItem.Image = req.file.filename
-        updateItem.sortorder = req.body.sortorder;
-        updateItem.createdby = req.body.email
-      
+        updateItem.address = req.body.address
+
         updateItem.save((err) => {
 
             if (err) {
@@ -58,11 +51,12 @@ exports.updatecareer = async (req, res, next) => {
         });
     }
 
-});
+  }
+)
 }
-exports.deletecareer = async (req, res, next) => {
+exports.deletecontactus = async (req, res, next) => {
   console.log(req.params.id)
-  const data = await Careers.findById(req.params.id, function (err, ditItem) {
+  const data = await Contactus.findById(req.params.id, function (err, ditItem) {
     if (!ditItem) {
       res.json({
         status: "error",
@@ -114,16 +108,14 @@ exports.deletecareer = async (req, res, next) => {
   //       throw new Error();
   //     }
   //   }
-  exports.getcareerbyid = async (req, res, next) => {
-    const pagesdata = await Careers.findOne({ _id: req.params.id }, (err, result) => {
-      
-      console.log(result.Image)
-      result.Image = "http://localhost:3000/careers/"+result.Image 
-         console.log(result.Image)
+  exports.getcontactusbyid = async (req, res, next) => {
+    const contactusdata = await Contactus.findOne({ _id: req.params.id }, (err, result) => {
+
       console.log(result)
       if (err) {
         consosle.log(err)
-        res.json({        status: "error",
+        res.json({       
+          status: "error",
           message: err,
         });
       } else {
@@ -135,8 +127,8 @@ exports.deletecareer = async (req, res, next) => {
       }
     })
   }
-  exports.getcareer = async (req, res, next) => {
-    const data = await Careers.find({ delstatus: false }, (err, result) => {
+  exports.getcontactus = async (req, res, next) => {
+    const data = await Contactus.find({ delstatus: false }, (err, result) => {
       console.log(result);
       if (result) {
         const response = {
