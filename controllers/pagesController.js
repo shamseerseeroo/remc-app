@@ -165,6 +165,14 @@ exports.getpagebyid = async (req, res, next) => {
     }
   })
 }
+exports.getbyslug = async(req, res, next) => {
+  res.data =await pagesService.getByslug(req.params.slug);
+  if (res.data) {
+    return next();
+  } else {
+    debug('Error occured while fetching perticular todo');
+  }
+}
 
 
 

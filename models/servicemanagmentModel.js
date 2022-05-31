@@ -15,11 +15,15 @@ var servicemanagmentSchema = new Schema(
         sortOrder: {
             type: Number,
             default: "",
-          },
+        },
+        slug: {
+            type: String,
+            unique: true
+        },
         delstatus: {
             type: Boolean,
             default: false
-          },
+        },
         Image: {
             type: String,
             required: false,
