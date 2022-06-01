@@ -12,7 +12,11 @@ var careersSchema = new Schema(
             required: true,
             index: true
         },
-        sortOrder: {
+        delstatus: {
+            type: Boolean,
+            default: false
+        },
+        sortorder: {
             type: Number,
             default: "",
           },

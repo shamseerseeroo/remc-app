@@ -140,8 +140,7 @@ exports.deletecareer = async (req, res, next) => {
       console.log(result);
       if (result) {
         const response = {
-          count: totalCount,
-          data: result,
+          data: result
         };
         res.data = response;
   
@@ -152,3 +151,25 @@ exports.deletecareer = async (req, res, next) => {
       }
     })
           }
+  exports.getcareersbyid= async (req,res,next) => {
+    const careersedata = await Careers.findOne({ _id: req.params.id }, (err, result) => {
+     
+      console.log(result)
+      result.Image = "http://localhost:3000/careers/" + result.Image
+      console.log(result.Image)
+      console.log(result)
+      if (err) {
+        consosle.log(err)
+        res.json({
+          status: "error",
+          message: err,
+        });
+      } else {
+        res.json({
+          status: "success",
+          message: 'career details loading0..',
+          data: result
+        });
+      }
+    })
+  }        

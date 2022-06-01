@@ -138,7 +138,6 @@ exports.deleteclientlisting = async (req, res, next) => {
       console.log(result);
       if (result) {
         const response = {
-          count: totalCount,
           data: result,
         };
         res.data = response;
