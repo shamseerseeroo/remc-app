@@ -6,7 +6,8 @@ const commonMethods = require('../utilities/common');
 const careersService = new modelService(Careers);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
-
+const fs = require('fs');
+const sharp= require("sharp")
 
 exports.create = async (req, res, next) => {
   res.data = await careersService.create({
@@ -18,6 +19,20 @@ exports.create = async (req, res, next) => {
     status: req.body.status
   });
   if (res.data) {
+    try {
+      sharp(req.file.path).resize(200, 200).toFile('uploads/careers/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {
+          if (err) {
+              console.log(err);
+          } else {
+              console.log(resizeImage);
+          }
+      })
+      return res.status(201).json({
+          message: 'File uploded successfully'
+      });
+  } catch (error) {
+      console.error(error);
+  }
     return next();
   }
   debug('Error occured while saving  data');
@@ -32,7 +47,17 @@ exports.updatecareer = async (req, res, next) => {
             message: err,
         });
     } else {   
-      
+      if(req.file.filename){
+        const path = './uploads/careers/'+updateItem.Image
+
+        try {
+          fs.unlinkSync(path)
+          //file removed
+        } catch(err) {
+          console.error(err)
+        }
+      }
+        
         updateItem.title = req.body.title;
         updateItem.description = req.body.description;
         updateItem.updateddate = new Date();

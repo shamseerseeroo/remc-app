@@ -15,7 +15,7 @@ const verifyToken = require('../middleware/response');
 const { nextTick } = require('process');
 const { response } = require('express');
 require("dotenv").config();
-
+const sharp = require('sharp');
 
 
 // //storage
@@ -72,6 +72,20 @@ exports.profile = async (req,res) => {
             updates.password = await bcrypt.hash(req.body.password, 10)
           }
            if (req.file) {
+            try {
+                sharp(req.file.path).resize(200, 200).toFile('uploads/profile/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(resizeImage);
+                    }
+                })
+                return res.status(201).json({
+                    message: 'File uploded successfully'
+                });
+            } catch (error) {
+                console.error(error);
+            }
                const userdata = await User.findOneAndUpdate({_id:req.body._id},{$set: updates}, { new: true })  
                return res.status(200).send(userdata);
            }else{

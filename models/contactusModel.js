@@ -1,6 +1,5 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var { Schema } = mongoose;
-var slugs = require('mongoose-url-slugs');
 
 var contactusSchema = new Schema(
   {

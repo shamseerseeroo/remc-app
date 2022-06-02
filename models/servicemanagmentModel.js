@@ -1,5 +1,6 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var { Schema } = mongoose;
+var slugs = require('mongoose-url-slugs');
 
 var servicemanagmentSchema = new Schema(
     {
@@ -55,5 +56,6 @@ var servicemanagmentSchema = new Schema(
         timestamps: true,
     }
 );
+servicemanagmentSchema.plugin(slugs('title'));
 
 module.exports = mongoose.model('Servicemanagment', servicemanagmentSchema);  

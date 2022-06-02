@@ -14,6 +14,9 @@ const Constant = require('./utilities/constant');
 const multer=require('multer')
 const bodyParser = require('body-parser'); 
 const app = express();
+
+fs = require('fs')
+
 require('express-async-errors');
 
 app.use(express.static("public"));

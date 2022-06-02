@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const upload = require('../middleware/pageupload');
 const { response } = require('../app');
+const fs = require('fs');
+const sharp = require('sharp');
 
 
 exports.create = async (req, res, next) => {
@@ -20,6 +22,20 @@ exports.create = async (req, res, next) => {
   console.log(req.body);
   console.log(res.data)
   if (res.data) {
+    try {
+      sharp(req.file.path).resize(200, 200).toFile('uploads/pages/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {
+          if (err) {
+              console.log(err);
+          } else {
+              console.log(resizeImage);
+          }
+      })
+      return res.status(201).json({
+          message: 'File uploded successfully'
+      });
+  } catch (error) {
+      console.error(error);
+  }
     return next();
   }
   debug('Error occured while saving  data');
@@ -34,12 +50,21 @@ exports.updatepage = async (req, res, next) => {
             message: err,
         });
     } else {   
+        if(req.file.filename){
+          const path = './uploads/pages/'+updateItem.Image
+
+          try {
+            fs.unlinkSync(path)
+            //file removed
+          } catch(err) {
+            console.error(err)
+          }
+        }
       
         updateItem.title = req.body.title;
         updateItem.description = req.body.description;
         updateItem.updateddate = new Date();
         updateItem.Image = req.file.filename
-        updateItem.description = req.body.description;
       
         updateItem.save((err) => {
 
