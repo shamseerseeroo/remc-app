@@ -11,9 +11,10 @@ exports.create = async (req, res, next) => {
   res.data = await contactusService.create({
     email: req.body.email,
     phonenumber: req.body.phonenumber,
-    address: req.body.address,
+    address: req.body.address
   });
   if (res.data) {
+    console.log(res.data)
     return next();
   }
   debug('Error occured while saving  data');
