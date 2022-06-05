@@ -1,23 +1,20 @@
 
-const rateLimit = require('express-rate-limit');
-
 const express = require('express');
 const router = express.Router();
-const clientslistingController = require('../controllers/clientslistingController');
-const middlewareResponse = require('../middleware/response');
+const clientlistingController = require('../controllers/clientlistingController');
+const middlewareReponse = require('../middleware/response');
 const multer  = require('multer')
-const upload = require("../middleware/clientslistingupload")
+const upload = require("../middleware/clientlistingupload")
 
 
 
 //create
-router.post('/', upload.single('Image'),middlewareResponse.verifyToken, clientslistingController.create,middlewareResponse.saveResponse);
+router.post('/', upload.single('Image'),middlewareReponse.verifyToken, clientlistingController.create,middlewareReponse.saveResponse);
 //update
-router.put('/:id',upload.single('Image'),middlewareResponse.verifyToken,clientslistingController.updateclientlisting, middlewareResponse.updateResponse);
-router.delete('/:id', middlewareResponse.verifyToken,clientslistingController.deleteclientlisting, middlewareResponse.deleteResponse);
-router.get('/',upload.single('Image'),middlewareResponse.verifyToken,clientslistingController.getclientlisting, middlewareResponse.getByIdResponse);
-
-
+router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,clientlistingController.updateclientlisting, middlewareReponse.updateResponse);
+router.delete('/:id', middlewareReponse.verifyToken,clientlistingController.deleteclientlisting, middlewareReponse.deleteResponse);
+router.get('/',upload.single('Image'),middlewareReponse.verifyToken,clientlistingController.getclientlisting, middlewareReponse.getByIdResponse);
+router.get('/id/:id',middlewareReponse.verifyToken,clientlistingController.getclientlistingbyid);
 
 
 module.exports=router;
