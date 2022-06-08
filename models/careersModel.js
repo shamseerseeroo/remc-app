@@ -10,7 +10,7 @@ var careersSchema = new Schema(
         description: {
             type: String,
             required: true,
-            index: true
+            
         },
         delstatus: {
             type: Boolean,

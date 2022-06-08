@@ -9,8 +9,7 @@ var clientlistingSchema = new Schema(
         },
         description: {
             type: String,
-            required: true,
-            index: true
+            required: true
         },
         delstatus: {
             type: Boolean,
@@ -46,10 +45,8 @@ var clientlistingSchema = new Schema(
         }
 
 
-    },
-    {
-        timestamps: true,
     }
+   
 );
 
 module.exports = mongoose.model('clientlisting', clientlistingSchema);  
