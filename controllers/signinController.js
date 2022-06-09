@@ -22,7 +22,7 @@ const signin = {
       const { email, password } = req.body
       console.log(req.body)
       if (!(email && password)) {
-        res.status(400).send({status:false,messege:"All input are required"});
+        res.status(401).send({status:false,messege:"All input are required"});
       }
       const user = await User.findOne({ email: email });
       if (!user) {
