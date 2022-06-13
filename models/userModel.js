@@ -8,12 +8,10 @@ var userSchema = new Schema(
       type: 'string',
     },
     email: {
-      type: 'string',
-      required: true,
+      type: 'string'
     },
     password: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
     image: {
       type : String

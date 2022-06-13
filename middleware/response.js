@@ -50,12 +50,14 @@ const ResponseMiddleWare = {
       .json({ success: false, error: Constant.labelList.serverError });
   },
   verifyToken: async (req,res,next) => {
+    console.log("token verifie")
     let authHeader = req.headers.authorization
     
     if(authHeader==undefined){
       res.status(401).send({error:"no token provided"})
     }
     let token=authHeader.split(" ").pop()
+    console.log(token)
     jwt.verify(token,process.env.SECRET_KEY,function(error,decoded){
       if(error){
         res.status(401).send({Message: "Authorization has been denied for this request."})

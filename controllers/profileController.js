@@ -52,7 +52,7 @@ const sharp = require('sharp');
 //         }
 //     }
 exports.updateprofile = async (req,res) => {
-     console.log(req.params.id);
+  
      if(req.body.password){
         var newpassword = await bcrypt.hash(req.body.password, 10)
       } 
@@ -69,7 +69,7 @@ exports.updateprofile = async (req,res) => {
             console.log(updateItem)
                
               
-              if(oldUser && oldUser._id != req.body._id){
+              if(oldUser && oldUser._id != req.params.id){
              // if (oldUser) {
                   return res.status(409).send("this user is already exist")
               }
@@ -77,7 +77,11 @@ exports.updateprofile = async (req,res) => {
          
 
           updateItem.username = req.body.username;
+          if(req.file){
+            updateItem.image= req.file.filename
+          }
           updateItem.email= req.body.email;
+         
           updateItem.password= newpassword;
          
           updateItem.save(function(err){
