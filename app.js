@@ -13,8 +13,9 @@ const Constant = require('./utilities/constant');
 //const fileUpload = require('express-fileupload');
 const multer=require('multer')
 const bodyParser = require('body-parser'); 
+const swaggerDoc = require('./config/swaggerdoc');
 const app = express();
-
+swaggerDoc(app);
 
 require('express-async-errors');
 

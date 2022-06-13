@@ -19,6 +19,7 @@ router.use("/pages",require('./pages.routes.js'))
 router.use("/career",careersData)
 router.use("/contactus",contactusdata)
 router.use("/clientlisting",clientlistingdata)
+router.use("/ourteam",require('./ourteam.routes'))
 
 
 router.use((err, req, res) => {

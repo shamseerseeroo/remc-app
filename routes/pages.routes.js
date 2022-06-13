@@ -6,14 +6,173 @@ const multer  = require('multer')
 const upload = require("../middleware/pageupload")
 
 
+/**
+ * @swagger
+ * definitions:
+ *   pages:
+ *     properties:
+ *       title:
+ *         type: string
+ *       description:
+ *         type: string
+ *       Image:
+ *         type: string
+ *       status:
+ *         type: Boolean
+ *       slug:
+ *         type: string
+ *       createdby:
+ *         type: string
+ *       
+ *        
+ */
 //create
 router.post('/', upload.single('Image'),middlewareReponse.verifyToken,pagesController.create,middlewareReponse.saveResponse);
+
+/**
+ * @swagger
+ * /api/v1/pages:
+ *   post:
+ *     tags:
+ *       - pages
+ *     description: Creates a new page
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: Auth
+ *         description: user object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/pages'
+ *     responses:
+ *       200:
+ *         description: Successfully created
+ */
 //update
 router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,pagesController.updatepage, middlewareReponse.updateResponse);
+  /**
+ * @swagger
+ * /api/v1/pages/:id: 
+ *   put:
+ *     tags:
+ *       - pages
+ *     description: Creates a new pages
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: pages id to Update
+ *         required: true
+ *         type: string
+ *       - in: body
+ *         name: body
+ *         description: Updated pages object
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/pages'
+ *     responses:
+ *       200:
+ *         description: Successfully created
+ */
 router.delete('/:id',middlewareReponse.verifyToken, pagesController.deletepage, middlewareReponse.deleteResponse);
+  /**
+ * @swagger
+ * /api/v1/pages: 
+ *   delete:
+ *     tags:
+ *       - pages
+ *     summary: Deletes a page
+ *     description: ''
+ *     operationId: deletepages
+ *     produces:
+ *       - application/xml
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: page id to delete
+ *         required: true
+ *         type: string
+ *     responses:
+ *       '400':
+ *         description: Invalid ID supplied
+ *       '404':
+ *         description: page not found   
+ * 
+ */  
 router.get('/',upload.single('Image'),middlewareReponse.verifyToken,pagesController.getpage, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/pages:
+ *   get:
+ *     tags:
+ *       - pages
+ *     description: Returns all pages
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of pages       
+ *         schema:
+ *           $ref: '#/definitions/pages'
+ *       400:
+ *         description: Invalid status value 
+ */
 router.get('/:slug',middlewareReponse.verifyToken,pagesController.getbyslug, middlewareReponse.getByIdResponse);
+/**
+* @swagger
+* /api/v1/{slug}: 
+*   get:
+*     tags:
+*       - pages
+*     description: get a single slug
+*     produces:
+*        - application/json
+*     parameters:
+*       - name: slug
+*         in: path
+*         description: slug to view
+*         required: true
+*         type: string
+*     responses:
+*       200:
+*         description: successful operation
+*         schema:
+*           $ref: '#/definitions/pages' 
+*       400:
+*          description: Invalid ID supplied
+*       404:
+*         description: page not found
+*/ 
 router.get('/id/:id',middlewareReponse.verifyToken,pagesController.getpagebyid);
+/**
+* @swagger
+* api/v1/pages/{id}: 
+*   get:
+*     tags:
+*       - pages
+*     description: get a single page
+*     produces:
+*        - application/json
+*     parameters:
+*       - name: id
+*         in: path
+*         description: page id to view
+*         required: true
+*         type: string
+*     responses:
+*       200:
+*         description: successful operation
+*         schema:
+*           $ref: '#/definitions/pages' 
+*       400:
+*          description: Invalid ID supplied
+*       404:
+*         description: pages not found
+*/ 
 
 
 

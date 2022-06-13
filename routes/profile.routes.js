@@ -11,7 +11,7 @@ const upload = require("../middleware/upload")
 
 
 //router.post('/', profileController.postdata,upload.single('image'), middlewareReponse.verifyToken);
-router.post('/', upload.single('image'),middlewareReponse.verifyToken,profileController.profile);
+router.put('/:id', upload.single('image'),middlewareReponse.verifyToken,profileController.updateprofile);
 router.get('/:id',middlewareReponse.verifyToken, profileController.getuser);
 
 

@@ -24,7 +24,7 @@ router.post("/",signup.postdata)
 /** 
 *   post:
 *     tags:
-*       - signin
+*       - signup
 *     summary: Create a user
 *     description: Creates a new user
 *     produces:
@@ -35,7 +35,7 @@ router.post("/",signup.postdata)
 *         in: body
 *         required: true
 *         schema:
-*           $ref: '#/definitions/signin'
+*           $ref: '#/definitions/signup'
 *     responses:
 *       200:
 *         description: Successfully created
