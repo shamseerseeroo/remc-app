@@ -51,51 +51,99 @@ const sharp = require('sharp');
 //             console.log(err)
 //         }
 //     }
-exports.profile = async (req,res) => {
-    console.log(req.body);
-      try {
-          let updates = {
-              ...req.body,
-              image: req.file.filename,
-          }
-
-          if(req.body.email){
-              const oldUser = await User.findOne({ email: req.body.email })
-              console.log(oldUser)
-              console.log(req.body._id)
+exports.updateprofile = async (req,res) => {
+     console.log(req.params.id);
+     if(req.body.password){
+        var newpassword = await bcrypt.hash(req.body.password, 10)
+      } 
+     if(req.body.email){
+        const oldUser = await User.findOne({ email: req.body.email })
+        console.log(oldUser)
+     User.findById(req.params.id, (err, updateItem) => {
+        if (err) {
+          res.json({
+            status: "error",
+            message: err,
+          });
+        } else {
+            console.log(updateItem)
+               
+              
               if(oldUser && oldUser._id != req.body._id){
              // if (oldUser) {
                   return res.status(409).send("this user is already exist")
               }
           }
-          if(req.body.password){
-            updates.password = await bcrypt.hash(req.body.password, 10)
-          }
-           if (req.file) {
-            try {
-                sharp(req.file.path).resize(200, 200).toFile('uploads/profile/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log(resizeImage);
-                    }
-                })
-                return res.status(201).json({
-                    message: 'File uploded successfully'
+         
+
+          updateItem.username = req.body.username;
+          updateItem.email= req.body.email;
+          updateItem.password= newpassword;
+         
+          updateItem.save(function(err){
+
+            if(err){
+                res.json({
+                    status: "error",
+                    message: err,
                 });
-            } catch (error) {
-                console.error(error);
             }
-               const userdata = await User.findOneAndUpdate({_id:req.body._id},{$set: updates}, { new: true })  
-               return res.status(200).send(userdata);
-           }else{
-              const userdata = await User.findOneAndUpdate({_id:req.body._id},{$set: updates}, { new: true })
-              return res.status(200).send(userdata);
-           }
-      } catch (error) {
-           console.log(error)      }
+            else{
+                res.json({
+                    status: "success",
+                    message: 'Updated Successfully',
+                    data: updateItem
+                });
+            }
+
+        });
+        
+
+     })
+    //   try {
+    //       let updates = {
+    //           ...req.body,
+    //           image: req.file.filename,
+    //       }
+
+    //       if(req.body.email){
+    //           const oldUser = await User.findOne({ email: req.body.email })
+    //           console.log(oldUser)
+    //           console.log(req.body._id)
+    //           if(oldUser && oldUser._id != req.body._id){
+    //          // if (oldUser) {
+    //               return res.status(409).send("this user is already exist")
+    //           }
+    //       }
+    //       if(req.body.password){
+    //         updates.password = await bcrypt.hash(req.body.password, 10)
+    //       }
+    //        if (req.file) {
+    //         try {
+    //             sharp(req.file.path).resize(200, 200).toFile('uploads/profile/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {
+    //                 if (err) {
+    //                     console.log(err);
+    //                 } else {
+    //                     console.log(resizeImage);
+    //                 }
+    //             })
+    //             return res.status(201).json({
+    //                 message: 'File uploded successfully'
+    //             });
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //            const userdata = await User.findOneAndUpdate({_id:req.body._id},{$set: updates}, { new: true })  
+    //            return res.status(200).send(userdata);
+    //        }else{
+    //           const userdata = await User.findOneAndUpdate({_id:req.body._id},{$set: updates}, { new: true })
+    //           return res.status(200).send(userdata);
+    //        }
+    //   } catch (error) {
+    //        console.log(error)      }
            
      }
+    }
 exports.getuser=async (req,res,next)=>{
         console.log(req.params.id)
        const userdata =await User.findOne({_id:req.params.id},(err,result)=>{
