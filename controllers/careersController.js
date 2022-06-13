@@ -154,7 +154,7 @@ exports.deletecareer = async (req, res, next) => {
       } else {
         res.json({
           status: "success",
-          message: 'pages details loading..',
+          message: 'careers details loading..',
           data: result
         });
       }
@@ -192,7 +192,7 @@ exports.deletecareer = async (req, res, next) => {
       } else {
         res.json({
           status: "success",
-          message: 'career details loading0..',
+          message: 'career details loading..',
           data: result
         });
       }

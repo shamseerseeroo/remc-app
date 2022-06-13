@@ -17,6 +17,10 @@ var pagesSchema = new Schema(
             required: false,
             default: null
         },
+        sortorder: {
+            type: Number,
+            default: "",
+          },
         status: {
             type: Boolean,
             default: false

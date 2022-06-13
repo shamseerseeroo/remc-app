@@ -53,13 +53,12 @@ const ResponseMiddleWare = {
     let authHeader = req.headers.authorization
     
     if(authHeader==undefined){
-      res.status(404).send({error:"no token provided"})
+      res.status(401).send({error:"no token provided"})
     }
     let token=authHeader.split(" ").pop()
-    console.log(token)
     jwt.verify(token,process.env.SECRET_KEY,function(error,decoded){
       if(error){
-        res.status(500).send({error:"authentification failed"})
+        res.status(401).send({Message: "Authorization has been denied for this request."})
       }else{
         //res.send(decoded)
         next()
