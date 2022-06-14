@@ -52,8 +52,8 @@ const sharp = require('sharp');
 //         }
 //     }
 exports.updateprofile = async (req,res) => {
-  
-     if(req.body.password){
+    const currentpasssword=req.body.currentpassword
+     if(req.body.currentpasssword){
         var newpassword = await bcrypt.hash(req.body.password, 10)
       } 
      if(req.body.email){
@@ -69,10 +69,17 @@ exports.updateprofile = async (req,res) => {
             console.log(updateItem)
                
               
-              if(oldUser && oldUser._id != req.params.id){
+              if(oldUser&oldUser._id != req.params.id){
              // if (oldUser) {
                   return res.status(409).send("this user is already exist")
               }
+          }
+          console.log(updateItem.password)
+          if(currentpasssword==updateItem.password){
+              const newpassword=req.body.newpassword
+              updateItem.password=newpassword
+          }else{
+            res.status(403).send({status:false,messege:"invalid password"});
           }
          
 
@@ -81,8 +88,6 @@ exports.updateprofile = async (req,res) => {
             updateItem.image= req.file.filename
           }
           updateItem.email= req.body.email;
-         
-          updateItem.password= newpassword;
          
           updateItem.save(function(err){
 
@@ -168,6 +173,38 @@ exports.getuser=async (req,res,next)=>{
             }
        })
     }
+// exports.passwordcheck=async(req,res)=>{
+//     const currentpasssword=req.body.password
+   
+//     User.findById(req.params.id, (err, updateItem) => {
+//         if (err) {
+//           res.json({
+//             status: "error",
+//             message: err,
+//           });
+//         } else {
+//             console.log(updateItem.password)
+//             if(currentpasssword==updateItem.password){
+//                 const newpassword=req.body.newpassword
+//                 updateItem.password=newpassword
+//                 if(err){
+//                     res.json({
+//                         status: "error",
+//                         message: err,
+//                     });
+//                 }
+//                 else{
+//                     res.json({
+//                         status: "success",
+//                         message: 'Updated password Successfully',
+//                         data: updateItem.password
+//                     });
+//                 }
+//             }
+              
+// }    
+//     })
+// }
 
 
      //  User.findOne({email:req.body.email},function(err,userdata){
