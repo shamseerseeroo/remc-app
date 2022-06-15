@@ -149,24 +149,26 @@ exports.deletepage = async (req, res, next) => {
   });
 
 }
-exports.getpage = async (req, res, next) => {
-  const totalCount = await pagesService.totalCount();
-  const data = await pages.find({ delstatus: false }, (err, result) => {
-    console.log(result);
-    if (result) {
-      const response = {
-        count: totalCount,
-        data: result,
-      };
-      res.data = response;
-
-      return next();
-    } else {
-      debug('Error occured while fetching all pages');
-      throw new Error();
-    }
-  })
-        }
+exports.getpage = (req, res) => {
+pages.find({
+          delstatus: false
+      }).sort({
+          sortorder: 1
+      })
+      .then(function (list) {
+          res.json({
+              status: "success",
+              message: "testimonial retrieved successfully",
+              data: list
+          });
+      })
+      .catch((err) => {
+          res.json({
+              status: "error",
+              message: err,
+          });
+      })
+};
 
 exports.getpagebyid = async (req, res, next) => {
   const pagesdata = await pages.findOne({ _id: req.params.id }, (err, result) => {

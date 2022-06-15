@@ -136,7 +136,7 @@ exports.deleteourteam = async (req, res, next) => {
 //     }
 //   }
 exports.getourteambyid = async (req, res, next) => {
-  const contactusdata = await Contactus.findOne({ _id: req.params.id }, (err, result) => {
+  const ourteamsdata = await Ourteam.findOne({ _id: req.params.id }, (err, result) => {
     result.Image = "http://localhost:3000/ourteam/"+result.Image 
     console.log(result)
     if (err) {
@@ -154,22 +154,26 @@ exports.getourteambyid = async (req, res, next) => {
     }
   })
 }
-exports.getourteam = async (req, res, next) => {
-  const data = await Ourteam.find({ delstatus: false }, (err, result) => {
-    console.log(result);
-    if (result) {
-      const response = {
-        data: result,
-      };
-      res.data = response;
-
-      return next();
-    } else {
-      debug('Error occured while fetching all pages');
-      throw new Error();
-    }
-  })
-}
+exports.getourteam = (req, res) => {
+  Ourteam.find({
+            delstatus: false
+        }).sort({
+            sortorder: 1
+        })
+        .then(function (list) {
+            res.json({
+                status: "success",
+                message: "testimonial retrieved successfully",
+                data: list
+            });
+        })
+        .catch((err) => {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        })
+  };
 exports.getourteambyid = async (req, res, next) => {
   const ourteamdata = await Ourteam.findOne({ _id: req.params.id }, (err, result) => {
 

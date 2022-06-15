@@ -159,22 +159,26 @@ exports.getservicebyid = async (req, res, next) => {
     }
   })
 }
-exports.getservice = async (req, res, next) => {
-  const data = await servicemanagment.find({ delstatus: false }, (err, result) => {
-    console.log(result);
-    if (result) {
-      const response = {
-        data: result,
-      };
-      res.data = response;
-
-      return next();
-    } else {
-      debug('Error occured while fetching all pages');
-      throw new Error();
-    }
-  })
-}
+exports.getservice = (req, res) => {
+  Service.find({
+            delstatus: false
+        }).sort({
+            sortorder: 1
+        })
+        .then(function (list) {
+            res.json({
+                status: "success",
+                message: "testimonial retrieved successfully",
+                data: list
+            });
+        })
+        .catch((err) => {
+            res.json({
+                status: "error",
+                message: err,
+            });
+        })
+  };
 exports.getbyslug = async (req, res, next) => {
   res.data = await Service.getByslug(req.params.slug);
   if (res.data) {
