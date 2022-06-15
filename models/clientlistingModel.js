@@ -15,6 +15,12 @@ var clientlistingSchema = new Schema(
             type: Boolean,
             default: false
         },
+        createdby: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            default: null,
+            index: true
+        },
         sortorder: {
             type: Number,
             default: "",

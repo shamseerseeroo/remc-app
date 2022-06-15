@@ -14,7 +14,7 @@ exports.create = async (req, res, next) => {
     name: req.body.name,
     description: req.body.description,
     Image: req.file.filename,
-    createdby: req.body.email,
+    createdby: req.body.userId,
     sortorder: req.body.sortorder,
     status: req.body.status
   });

@@ -14,7 +14,7 @@ exports.create = async (req, res, next) => {
     title: req.body.title,
     description: req.body.description,
     Image: req.file.filename,
-    createdby: req.body.email,
+    createdby: req.body.userId,
     sortorder: req.body.sortorder,
     status: req.body.status
   });
@@ -48,6 +48,7 @@ exports.updatecareer = async (req, res, next) => {
         });
     } else {   
       if(req.file.filename){
+        
         const path = './uploads/careers/'+updateItem.Image
 
         try {

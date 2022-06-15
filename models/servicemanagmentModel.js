@@ -25,6 +25,12 @@ var servicemanagmentSchema = new Schema(
             type: Boolean,
             default: false
         },
+        createdby: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            default: null,
+            index: true
+        },
         Image: {
             type: String,
             required: false,

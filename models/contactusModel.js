@@ -20,7 +20,10 @@ var contactusSchema = new Schema(
       default: false
     },
     createdby: {
-      type: String
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      default: null,
+      index: true
     },
     createddate: {
       type: Date,
