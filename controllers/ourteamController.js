@@ -10,6 +10,7 @@ const fs = require('fs');
 const sharp= require("sharp")
 
 exports.create = async (req, res, next) => {
+  console.log("hu");
   res.data = await ourteamService.create({
     Name: req.body.Name,
     designation: req.body.designation,
@@ -27,7 +28,9 @@ exports.create = async (req, res, next) => {
           }
       })
       return res.status(201).json({
-          message: 'File uploded successfully'
+        status: "success",
+        message: "ourteam retrieved successfully",
+        data: res.data
       });
   } catch (error) {
       console.error(error);

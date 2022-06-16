@@ -28,7 +28,9 @@ exports.create = async (req, res, next) => {
           }
       })
       return res.status(201).json({
-          message: 'File uploded successfully'
+        status: "success",
+        message: "service retrieved successfully",
+        data: res.data
       });
   } catch (error) {
       console.error(error);
@@ -138,8 +140,8 @@ exports.deleteservice = async (req, res, next) => {
 //     }
 //   }
 exports.getservicebyid = async (req, res, next) => {
+  console.log("hii")
   const servicedata = await servicemanagment.findOne({ _id: req.params.id }, (err, result) => {
-     
     console.log(result.Image)
     result.Image = "http://localhost:3000/service/" + result.Image
     console.log(result.Image)

@@ -24,69 +24,75 @@ exports.create = async (req, res, next) => {
   if (res.data) {
     try {
       sharp(req.file.path).resize(200, 200).toFile('uploads/pages/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {
-          if (err) {
-              console.log(err);
-          } else {
-              console.log(resizeImage);
-          }
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(resizeImage);
+        }
       })
       return res.status(201).json({
-          message: 'File uploded successfully'
+        status: "success",
+                message: "pages retrieved successfully",
+                data: res.data
       });
-  } catch (error) {
+    } catch (error) {
       console.error(error);
-  }
+    }
     return next();
   }
   debug('Error occured while saving  data');
   throw new Error();
 }
 exports.updatepage = async (req, res, next) => {
+  console.log(req)
   pages.findById(req.params.id, (err, updateItem) => {
-    
+
     if (err) {
-        res.json({
+      res.json({
+        status: "error",
+        message: err,
+      });
+    } else {
+      if (req.file.filename) {
+        const path = './uploads/pages/' + updateItem.Image
+
+        try {
+          fs.unlinkSync(path)
+          //file removed
+        } catch (err) {
+          console.error(err)
+        }
+
+      }
+
+      updateItem.Image = req.file.filename
+      updateItem.title = req.body.title;
+      updateItem.description = req.body.description;
+      updateItem.updateddate = new Date();
+
+
+
+      updateItem.save((err) => {
+
+        if (err) {
+          res.json({
             status: "error",
             message: err,
-        });
-    } else {   
-        if(req.file.filename){
-          const path = './uploads/pages/'+updateItem.Image
-
-          try {
-            fs.unlinkSync(path)
-            //file removed
-          } catch(err) {
-            console.error(err)
-          }
+          });
+        } else {
+          res.json({
+            status: "success",
+            message: 'Updated Successfully',
+            data: updateItem
+          });
         }
-      
-        updateItem.title = req.body.title;
-        updateItem.description = req.body.description;
-        updateItem.updateddate = new Date();
-        updateItem.Image = req.file.filename
-      
-        updateItem.save((err) => {
 
-            if (err) {
-                res.json({
-                    status: "error",
-                    message: err,
-                });
-            } else {
-                res.json({
-                    status: "success",
-                    message: 'Updated Successfully',
-                    data: updateItem
-                });
-            }
-
-        });
+      });
     }
 
-});
-      
-    }
+  });
+
+}
 //   console.log(updateData)
 //   const data = await pages.findOne({_id:req.params.id,delstatus:false},function(err,result){
 //     if (err) {
@@ -106,7 +112,7 @@ exports.updatepage = async (req, res, next) => {
 
 
 
-  // // save the contact and check for errors
+// // save the contact and check for errors
 
 exports.deletepage = async (req, res, next) => {
   console.log(req.params.id)
@@ -150,24 +156,24 @@ exports.deletepage = async (req, res, next) => {
 
 }
 exports.getpage = (req, res) => {
-pages.find({
-          delstatus: false
-      }).sort({
-          sortorder: 1
-      })
-      .then(function (list) {
-          res.json({
-              status: "success",
-              message: "testimonial retrieved successfully",
-              data: list
-          });
-      })
-      .catch((err) => {
-          res.json({
-              status: "error",
-              message: err,
-          });
-      })
+  pages.find({
+    delstatus: false
+  }).sort({
+    sortorder: 1
+  })
+    .then(function (list) {
+      res.json({
+        status: "success",
+        message: "testimonial retrieved successfully",
+        data: list
+      });
+    })
+    .catch((err) => {
+      res.json({
+        status: "error",
+        message: err,
+      });
+    })
 };
 
 exports.getpagebyid = async (req, res, next) => {
@@ -192,8 +198,8 @@ exports.getpagebyid = async (req, res, next) => {
     }
   })
 }
-exports.getbyslug = async(req, res, next) => {
-  res.data =await pagesService.getByslug(req.params.slug);
+exports.getbyslug = async (req, res, next) => {
+  res.data = await pagesService.getByslug(req.params.slug);
   if (res.data) {
     return next();
   } else {

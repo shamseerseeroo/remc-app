@@ -28,7 +28,9 @@ exports.create = async (req, res, next) => {
           }
       })
       return res.status(201).json({
-          message: 'File uploded successfully'
+        status: "success",
+        message: "clientlisting retrieved successfully",
+        data: res.data
       });
   } catch (error) {
       console.error(error);
