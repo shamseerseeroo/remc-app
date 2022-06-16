@@ -160,7 +160,8 @@ exports.getservicebyid = async (req, res, next) => {
   })
 }
 exports.getservice = (req, res) => {
-  Service.find({
+
+  servicemanagment.find({
             delstatus: false
         }).sort({
             sortorder: 1
@@ -184,7 +185,7 @@ exports.getbyslug = async (req, res, next) => {
   if (res.data) {
     return next();
   } else {
-    debug('Error occured while fetching perticular todo');
+    debug('Error occured while fetching perticular service');
   }
 }
 
