@@ -161,22 +161,27 @@ exports.deletecareer = async (req, res, next) => {
       }
     })
   }
-  exports.getcareer = async (req, res, next) => {
-    const data = await Careers.find({ delstatus: false }, (err, result) => {
-      console.log(result);
-      if (result) {
-        const response = {
-          data: result
-        };
-        res.data = response;
-  
-        return next();
-      } else {
-        debug('Error occured while fetching all pages');
-        throw new Error();
-      }
-    })
-          }
+  exports.getcareer = (req, res) => {
+
+    Careers.find({
+              delstatus: false
+          }).sort({
+              sortorder: 1
+          })
+          .then(function (list) {
+              res.json({
+                  status: "success",
+                  message: "testimonial retrieved successfully",
+                  data: list
+              });
+          })
+          .catch((err) => {
+              res.json({
+                  status: "error",
+                  message: err,
+              });
+          })
+    };
   exports.getcareersbyid= async (req,res,next) => {
     const careersedata = await Careers.findOne({ _id: req.params.id }, (err, result) => {
      
