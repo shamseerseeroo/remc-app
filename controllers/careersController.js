@@ -9,6 +9,8 @@ const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const sharp= require("sharp")
 
+
+
 exports.create = async (req, res, next) => {
   res.data = await careersService.create({
     title: req.body.title,

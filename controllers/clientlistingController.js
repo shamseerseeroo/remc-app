@@ -1,69 +1,51 @@
+require('express-async-errors');
 
 const modelService = require('../services/modelService');
 const dotenv = require('dotenv');
 const clientlistingModel = require('../models/clientlistingModel');
 const commonMethods = require('../utilities/common');
 const clientlistingService = new modelService(clientlistingModel);
-const bodyParser = require('body-parser');
+const upload = require('../middleware/clientlistingupload');
 const bcrypt = require('bcryptjs');
+const bodyParser = require('body-parser');
 const fs = require('fs');
 const sharp= require("sharp")
 
 exports.create = async (req, res, next) => {
+  console.log("hiii")
+  console.log(req.body)
   res.data = await clientlistingService.create({
     name: req.body.name,
     description: req.body.description,
     Image: req.file.filename,
-    createdby: req.body.userId,
     sortorder: req.body.sortorder,
-    status: req.body.status
+    createdby: req.body.userId,
+    status:req.body.status
   });
+  console.log(req.body);
+  console.log(res.data)
   if (res.data) {
     try {
       sharp(req.file.path).resize(200, 200).toFile('uploads/clientlisting/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {
-          if (err) {
-              console.log(err);
-          } else {
-              console.log(resizeImage);
-          }
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(resizeImage);
+        }
       })
       return res.status(201).json({
         status: "success",
-        message: "clientlisting retrieved successfully",
-        data: res.data
+                message: "clientlisting retrieved successfully",
+                data: res.data
       });
-  } catch (error) {
+    } catch (error) {
       console.error(error);
-  }
+    }
     return next();
   }
   debug('Error occured while saving  data');
   throw new Error();
 }
-// var clientlistings = new clientlistingModel();
-// clientlistings.name = req.body.name;  
-// clientlistings.description=req.body.description;
-// clientlistings.Image=req.body.Image
-// clientlistings.sortorder=req.body.sortorder
-// clientlistings.status=req.body.status
-
-
-// clientlistings.save((err)=> {
-//  if (err)
-//  {
-//     res.json({
-//         status: "error",
-//         message: err,
-//     });
-// }else{
-//  res.json({
-//       status: "success",
-//       message: 'Successfully Created',
-//       data: clientlistings
-//    });
-// }
-// }); 
-
 exports.updateclientlisting = async (req, res, next) => {
     clientlistingModel.findById(req.params.id, (err, updateItem) => {
     
