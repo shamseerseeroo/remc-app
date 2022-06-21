@@ -6,7 +6,7 @@ var contactusSchema = new Schema(
 
     email: {
       type: 'string',
-      required: true,
+      required: true
     },
     phonenumber: {
       type: 'string',
@@ -42,9 +42,6 @@ var contactusSchema = new Schema(
 
 
 
-  },
-  {
-    timestamps: true,
   }
 );
 
