@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
 exports.create = async (req, res, next) => {
+  console.log(req,"hehehe");
   res.data = await contactusService.create({
     email: req.body.email,
     phonenumber: req.body.phonenumber,
@@ -20,6 +21,28 @@ exports.create = async (req, res, next) => {
   debug('Error occured while saving  data');
   throw new Error();
 }
+// exports.create = async (req, res) => {
+
+//   var Contactus = new Contactus();
+//   Contactus.email = req.body.email;
+//   Contactus.phonenumber = req.body.phonenumber;
+//   Contactus.address = req.body.address;
+
+//   Contactus.save((err) => {
+//       if (err) {
+//           res.json({
+//               status: "error",
+//               message: err,
+//           });
+//       } else {
+//           res.json({
+//               status: "success",
+//               message: 'Successfully Created',
+//               data: Contactus
+//           });
+//       }
+//   });
+// };
 exports.updatecontactus = async (req, res, next) => {
   Contactus.findById(req.params.id, (err, updateItem) => {
     if (err) {
@@ -108,25 +131,6 @@ exports.deletecontactus = async (req, res, next) => {
 //       throw new Error();
 //     }
 //   }
-exports.getcontactusbyid = async (req, res, next) => {
-  const contactusdata = await Contactus.findOne({ _id: req.params.id }, (err, result) => {
-
-    console.log(result)
-    if (err) {
-      consosle.log(err)
-      res.json({
-        status: "error",
-        message: err,
-      });
-    } else {
-      res.json({
-        status: "success",
-        message: 'pages details loading..',
-        data: result
-      });
-    }
-  })
-}
 exports.getcontactus = async (req, res, next) => {
   const data = await Contactus.find({ delstatus: false }, (err, result) => {
     console.log(result);
@@ -144,13 +148,10 @@ exports.getcontactus = async (req, res, next) => {
   })
 }
 exports.getcontactusbyid = async (req, res, next) => {
+  
   const contactusdata = await Contactus.findOne({ _id: req.params.id }, (err, result) => {
-
-    console.log(result.Image)
-    console.log(result.Image)
     console.log(result)
     if (err) {
-      consosle.log(err)
       res.json({
         status: "error",
         message: err,
@@ -158,7 +159,7 @@ exports.getcontactusbyid = async (req, res, next) => {
     } else {
       res.json({
         status: "success",
-        message: 'pages details loading..',
+        message: 'contactus details loading..',
         data: result
       });
     }

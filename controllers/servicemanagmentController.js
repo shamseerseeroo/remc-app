@@ -7,7 +7,7 @@ const Service = new modelService(servicemanagment);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const sharp= require("sharp")
-
+const fs = require('fs');
 
 exports.create = async (req, res, next) => {
   res.data = await Service.create({

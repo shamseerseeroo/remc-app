@@ -19,12 +19,6 @@ var contactusSchema = new Schema(
       type: Boolean,
       default: false
     },
-    createdby: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      default: null,
-      index: true
-    },
     createddate: {
       type: Date,
       default: Date.now
