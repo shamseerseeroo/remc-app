@@ -182,6 +182,7 @@ exports.getourteambyid = async (req, res, next) => {
 
     console.log(result.Image)
     console.log(result.Image)
+    result.Image = "http://localhost:3000/ourteam/" + result.Image
     console.log(result)
     if (err) {
       consosle.log(err)
