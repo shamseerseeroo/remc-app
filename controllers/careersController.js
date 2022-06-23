@@ -144,27 +144,6 @@ exports.deletecareer = async (req, res, next) => {
   //       throw new Error();
   //     }
   //   }
-  exports.getcareerbyid = async (req, res, next) => {
-    const pagesdata = await Careers.findOne({ _id: req.params.id }, (err, result) => {
-      
-      console.log(result.Image)
-      result.Image = "http://localhost:3000/careers/"+result.Image 
-         console.log(result.Image)
-      console.log(result)
-      if (err) {
-        consosle.log(err)
-        res.json({        status: "error",
-          message: err,
-        });
-      } else {
-        res.json({
-          status: "success",
-          message: 'careers details loading..',
-          data: result
-        });
-      }
-    })
-  }
   exports.getcareer = (req, res) => {
 
     Careers.find({
@@ -187,6 +166,7 @@ exports.deletecareer = async (req, res, next) => {
           })
     };
   exports.getcareersbyid= async (req,res,next) => {
+    console.log("hiicareerrs")
     const careersedata = await Careers.findOne({ _id: req.params.id }, (err, result) => {
      
       console.log(result)

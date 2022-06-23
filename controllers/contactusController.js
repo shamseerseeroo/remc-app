@@ -148,20 +148,23 @@ exports.getcontactus = async (req, res, next) => {
   })
 }
 exports.getcontactusbyid = async (req, res, next) => {
-  
   const contactusdata = await Contactus.findOne({ _id: req.params.id }, (err, result) => {
+    console.log("hiiii")
+    
+       
     console.log(result)
     if (err) {
-      res.json({
-        status: "error",
+      console.log("error")
+      res.json({        status: "error",
         message: err,
       });
     } else {
+      console.log("success");
       res.json({
         status: "success",
-        message: 'contactus details loading..',
+        message: 'contact details loading..',
         data: result
       });
     }
   })
-}         
+}        

@@ -138,25 +138,6 @@ exports.deleteourteam = async (req, res, next) => {
 //       throw new Error();
 //     }
 //   }
-exports.getourteambyid = async (req, res, next) => {
-  const ourteamsdata = await Ourteam.findOne({ _id: req.params.id }, (err, result) => {
-    result.Image = "http://localhost:3000/ourteam/"+result.Image 
-    console.log(result)
-    if (err) {
-      consosle.log(err)
-      res.json({
-        status: "error",
-        message: err,
-      });
-    } else {
-      res.json({
-        status: "success",
-        message: 'our team details loading..',
-        data: result
-      });
-    }
-  })
-}
 exports.getourteam = (req, res) => {
   Ourteam.find({
             delstatus: false
