@@ -54,7 +54,7 @@ const ResponseMiddleWare = {
     let authHeader = req.headers.authorization
     
     if(authHeader==undefined){
-     return res.status(401).send({error:"no token provided"})
+     return res.status(403).send({error:"no token provided"})
     }
     let token=authHeader.split(" ").pop()
     console.log(token)
@@ -63,6 +63,7 @@ const ResponseMiddleWare = {
        return res.status(401).send({Message: "Authorization has been denied for this request."})
       }else{
         //res.send(decoded)
+        console.log("success verification")
         next()
       }
     })
