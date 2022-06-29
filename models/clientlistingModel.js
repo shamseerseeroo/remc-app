@@ -4,12 +4,12 @@ var { Schema } = mongoose;
 var clientlistingSchema = new Schema(
     {
         name: {
-            type: String,
-            required: true
+            type: String
+          
         },
         description: {
-            type: String,
-            required: true
+            type: String
+           
         },
         delstatus: {
             type: Boolean,

@@ -5,12 +5,11 @@ var slugs = require('mongoose-url-slugs');
 var servicemanagmentSchema = new Schema(
     {
         title: {
-            type: String,
-            required: true
+            type: String
+           
         },
         description: {
             type: String,
-            required: true,
             index: true
         },
         sortorder: {

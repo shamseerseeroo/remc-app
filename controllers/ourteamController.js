@@ -48,7 +48,8 @@ exports.updateourteam = async (req, res, next) => {
         message: err,
       });
     } else {
-        if(req.file.filename){
+        if(req.file){
+          
             const path = './uploads/ourteam/'+updateItem.Image
     
             try {
@@ -60,7 +61,9 @@ exports.updateourteam = async (req, res, next) => {
           }
       updateItem.Name = req.body.Name;
       updateItem.designation = req.body.designation;
-      updateItem.Image = req.file.filename
+      if(req.file){
+        updateItem.Image = req.file.filename
+      }   
       updateItem.sortorder = req.body.sortorder
 
       updateItem.save((err) => {

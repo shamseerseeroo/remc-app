@@ -55,7 +55,7 @@ exports.updateclientlisting = async (req, res, next) => {
             message: err,
         });
     } else {   
-      if(req.file.filename){
+      if(req.file){
         const path = './uploads/clientlisting/'+updateItem.Image
 
         try {
@@ -69,9 +69,11 @@ exports.updateclientlisting = async (req, res, next) => {
         updateItem.name = req.body.name;
         updateItem.description = req.body.description;
         updateItem.updateddate = new Date();
-        updateItem.Image = req.file.filename
+        if(req.file){
+          updateItem.Image = req.file.filename
+        }
         updateItem.sortorder = req.body.sortorder;
-        updateItem.createdby = req.body.email
+        updateItem.createdby = req.body.userId
       
         updateItem.save((err) => {
 

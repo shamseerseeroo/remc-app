@@ -48,20 +48,26 @@ exports.updateservice = async (req, res, next) => {
         message: err,
       });
     } else {
-      if(req.file.filename){
+      console.log(updateItem.Image)
+      if(req.file){
+        
         const path = './uploads/service/'+updateItem.Image
 
         try {
           fs.unlinkSync(path)
           //file removed
+         
         } catch(err) {
           console.error(err)
         }
       }
       updateItem.title = req.body.title;
+      if(req.file){
+        updateItem.Image = req.file.filename
+      }
       updateItem.description = req.body.description;
       updateItem.updateddate = new Date();
-      updateItem.Image = req.file.filename
+     
       updateItem.sortorder = req.body.sortorder
 
       updateItem.save((err) => {

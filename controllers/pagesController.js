@@ -1,4 +1,5 @@
 require('express-async-errors');
+
 const modelService = require('../services/modelService');
 const dotenv = require('dotenv');
 const pages = require('../models/pagesModel');
@@ -10,7 +11,6 @@ const upload = require('../middleware/pageupload');
 const { response } = require('../app');
 const fs = require('fs');
 const sharp = require('sharp');
-
 
 exports.create = async (req, res, next) => {
   res.data = await pagesService.create({
@@ -32,8 +32,8 @@ exports.create = async (req, res, next) => {
       })
       return res.status(201).json({
         status: "success",
-                message: "pages retrieved successfully",
-                data: res.data
+        message: "pages retrieved successfully",
+        data: res.data
       });
     } catch (error) {
       console.error(error);
@@ -44,33 +44,36 @@ exports.create = async (req, res, next) => {
   throw new Error();
 }
 exports.updatepage = async (req, res, next) => {
-  console.log(req)
+   
   pages.findById(req.params.id, (err, updateItem) => {
 
     if (err) {
+      
       res.json({
         status: "error",
         message: err,
       });
     } else {
-      if (req.file.filename) {
-        const path = './uploads/pages/' + updateItem.Image
+      console.log(updateItem.Image)
+      if(req.file){
+        
+        const path = './uploads/pages/'+updateItem.Image
 
         try {
           fs.unlinkSync(path)
           //file removed
-        } catch (err) {
+         
+        } catch(err) {
           console.error(err)
         }
-
       }
-
-      updateItem.Image = req.file.filename
       updateItem.title = req.body.title;
+      if(req.file){
+        updateItem.Image = req.file.filename
+      }
       updateItem.description = req.body.description;
       updateItem.updateddate = new Date();
-
-
+     
 
       updateItem.save((err) => {
 

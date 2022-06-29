@@ -5,12 +5,11 @@ var slugs = require('mongoose-url-slugs');
 var pagesSchema = new Schema(
     {
         title: {
-            type: String,
-            required: true
+            type: String
         },
         description: {
-            type: String,
-            required: true,
+            type: String
+           
         },
         Image: {
             type: String,
