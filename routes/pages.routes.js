@@ -19,8 +19,6 @@ const upload = require("../middleware/pageupload")
  *         type: string
  *       status:
  *         type: Boolean
- *       slug:
- *         type: string
  *       createdby:
  *         type: string
  *       
@@ -33,15 +31,36 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken,pagesContr
  * @swagger
  * /api/v1/pages:
  *   post:
+ *     security:           
+ *       - Bearer: []
  *     tags:
  *       - pages
- *     description: Creates a new page
+ *     summary: Uploads a file.
+ *     consumes:
+ *       - multipart/form-data
+ *     description: Creates a new pages
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: Auth
- *         description: user object
- *         in: body
+ *       - in: formData
+ *         name: Image
+ *         type: file
+ *         description: The file to upload
+ *       - in: formData
+ *         name: title
+ *         type: string
+ *         required: true
+ *       - in: formData
+ *         name: description
+ *         type: string
+ *         required: true
+ *       - in: formData
+ *         name: sortorder
+ *         type: string
+ *         required: true
+ *       - in: formData
+ *         name: userId
+ *         type: string
  *         required: true
  *         schema:
  *           $ref: '#/definitions/pages'
@@ -53,11 +72,13 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken,pagesContr
 router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,pagesController.updatepage, middlewareReponse.updateResponse);
   /**
  * @swagger
- * /api/v1/pages/:id: 
+ * /api/v1/pages/{id}: 
  *   put:
+ *     security:           
+ *       - Bearer: []
  *     tags:
  *       - pages
- *     description: Creates a new pages
+ *     description: update a new pages
  *     produces:
  *       - application/json
  *     parameters:
@@ -79,8 +100,10 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,pagesCont
 router.delete('/:id',middlewareReponse.verifyToken, pagesController.deletepage, middlewareReponse.deleteResponse);
   /**
  * @swagger
- * /api/v1/pages: 
+ * /api/v1/pages/{id}: 
  *   delete:
+ *     security:           
+ *       - Bearer: []
  *     tags:
  *       - pages
  *     summary: Deletes a page
@@ -107,6 +130,8 @@ router.get('/',upload.single('Image'),middlewareReponse.verifyToken,pagesControl
  * @swagger
  * /api/v1/pages:
  *   get:
+ *     security:           
+ *       - Bearer: [] 
  *     tags:
  *       - pages
  *     description: Returns all pages
@@ -126,6 +151,8 @@ router.get('/:slug',middlewareReponse.verifyToken,pagesController.getbyslug, mid
 * @swagger
 * /api/v1/{slug}: 
 *   get:
+*     security:           
+*       - Bearer: []
 *     tags:
 *       - pages
 *     description: get a single slug
@@ -150,8 +177,10 @@ router.get('/:slug',middlewareReponse.verifyToken,pagesController.getbyslug, mid
 router.get('/id/:id',middlewareReponse.verifyToken,pagesController.getpagebyid);
 /**
 * @swagger
-* api/v1/pages/{id}: 
+* /api/v1/pages/id/{id}: 
 *   get:
+*     security:           
+*       - Bearer: []
 *     tags:
 *       - pages
 *     description: get a single page

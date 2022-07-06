@@ -22,6 +22,8 @@ const middlewareReponse = require('../middleware/response');
 router.post("/",signup.postdata)
 
 /** 
+* @swagger
+* /api/v1/signup: 
 *   post:
 *     tags:
 *       - signup

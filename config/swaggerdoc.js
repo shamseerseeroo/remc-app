@@ -10,6 +10,14 @@ var swaggerDefinition = {
     },
     host: 'localhost:3000',
     basePath: '/',
+    securityDefinitions: {
+      Bearer: {
+        type: 'apiKey',
+        description: 'JWT authorization of an API',
+        name: 'Authorization',
+        in: 'header',
+      },
+    },
   };
   // options for the swagger docs
   var options = {

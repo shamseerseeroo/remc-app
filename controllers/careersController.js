@@ -12,6 +12,8 @@ const sharp= require("sharp")
 
 
 exports.create = async (req, res, next) => {
+  console.log(req.body)
+  console.log(req.file.filename)
   res.data = await careersService.create({
     title: req.body.title,
     description: req.body.description,
@@ -21,6 +23,7 @@ exports.create = async (req, res, next) => {
     status: req.body.status
   });
   if (res.data) {
+    console.log(res.data)
     try {
       sharp(req.file.path).resize(200, 200).toFile('uploads/careers/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {
           if (err) {
@@ -29,6 +32,7 @@ exports.create = async (req, res, next) => {
               console.log(resizeImage);
           }
       })
+      console.log("heloo")
       return res.status(201).json({
         status: "success",
         message: "careers retrieved successfully",
@@ -51,7 +55,7 @@ exports.updatecareer = async (req, res, next) => {
             message: err,
         });
     } else {   
-      if(req.file.filename){
+      if(req.file){
         
         const path = './uploads/careers/'+updateItem.Image
 
@@ -66,7 +70,9 @@ exports.updatecareer = async (req, res, next) => {
         updateItem.title = req.body.title;
         updateItem.description = req.body.description;
         updateItem.updateddate = new Date();
+        if(req.file){
         updateItem.Image = req.file.filename
+        }
         updateItem.sortorder = req.body.sortorder;
         updateItem.createdby = req.body.email
       

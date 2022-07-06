@@ -13,14 +13,16 @@ const fs = require('fs');
 const sharp = require('sharp');
 
 exports.create = async (req, res, next) => {
+  console.log("hii")
+  console.log(req.body)
+  console.log(req.file)
   res.data = await pagesService.create({
     title: req.body.title,
     description: req.body.description,
     Image: req.file.filename,
     createdby: req.body.userId
   });
-  console.log(req.body);
-  console.log(res.data)
+    console.log(res.data)
   if (res.data) {
     try {
       sharp(req.file.path).resize(200, 200).toFile('uploads/pages/thumbs/' + 'thumbnails-' + req.file.originalname, (err, resizeImage) => {

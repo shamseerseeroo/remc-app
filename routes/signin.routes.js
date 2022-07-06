@@ -19,6 +19,8 @@ const middlewareReponse = require('../middleware/response');
 router.post('/', signinController.postdata);
 
 /** 
+* @swagger
+* /api/v1/signin: 
 *   post:
 *     tags:
 *       - signin
@@ -27,8 +29,8 @@ router.post('/', signinController.postdata);
 *     produces:
 *       - application/json
 *     parameters:
- *      - name: Auth
- *        description: user object
+*       - name: Auth
+*         description: user object
 *         in: body
 *         required: true
 *         schema:

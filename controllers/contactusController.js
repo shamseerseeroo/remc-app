@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 
 exports.create = async (req, res, next) => {
-  console.log(req,"hehehe");
+ 
   res.data = await contactusService.create({
     email: req.body.email,
     phonenumber: req.body.phonenumber,
@@ -147,9 +147,9 @@ exports.getcontactus = async (req, res, next) => {
     }
   })
 }
-exports.getcontactusbyid = async (req, res) => {
-  
-  const contactusdata = await Contactus.findOne({id : req.params.id }, (err, result) => {
+exports.getcontactusbyid = async (req, res, next) => {
+  console.log(req)
+  const contactusdata = await Contactus.findOne({_id : req.params.id }, (err, result) => {
     console.log("hiiii")
     
        
