@@ -47,6 +47,11 @@ router.put('/:id', upload.single('image'),middlewareReponse.verifyToken,profileC
  *       - application/json
  *     parameters:
  *       - in: formData
+ *         name: id
+ *         type: string
+ *         description: profile id to view
+ *         required: true
+ *       - in: formData
  *         name: image
  *         type: file
  *         description: The file to upload
@@ -61,9 +66,6 @@ router.put('/:id', upload.single('image'),middlewareReponse.verifyToken,profileC
  *         type: string
  *       - in: formData
  *         name: newpassword
- *         type: string
- *       - in: formData
- *         name: password
  *         type: string
  *         schema:
  *           $ref: '#/definitions/profile'

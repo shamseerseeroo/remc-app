@@ -4,6 +4,9 @@ const postData = require("./signin.routes");
 const careersData = require("./careers.routes")
 const contactusdata = require('./contactus.routes')
 const clientlistingdata  = require("./clientslisting.routes")
+const blogdata  = require("./blog.routes")
+const ourprojects  = require("./ourprojects.routes")
+
 const router = express.Router();
 router.get('/', (req, res) => {
   res.send('TODO API Version 1');
@@ -16,6 +19,8 @@ router.use("/signin", postData);
 router.use("/profile",require('./profile.routes'))
 router.use("/service",require('./servicemanagment.routes'))
 router.use("/pages",require('./pages.routes.js'))
+router.use("/blog",blogdata)
+router.use("/ourprojects",ourprojects)
 router.use("/career",careersData)
 router.use("/contactus",contactusdata)
 router.use("/clientlisting",clientlistingdata)
