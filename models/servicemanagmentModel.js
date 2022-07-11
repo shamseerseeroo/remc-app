@@ -39,9 +39,6 @@ var servicemanagmentSchema = new Schema(
             type: Boolean,
             default: false
         },
-        createdby: {
-            type: String
-        },
         createddate: {
             type: Date,
             default: Date.now

@@ -1,7 +1,7 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var { Schema } = mongoose;
 
-var careersSchema = new Schema(
+var bannerSchema = new Schema(
     {
         title: {
             type: String
@@ -41,16 +41,15 @@ var careersSchema = new Schema(
             type: String,
             default: null
         },
-        updateddate: {
-            type: Date,
-            default: null
+        buttonurl:{
+            type: String
+        },
+        buttontext:{
+            type: String
         }
 
 
-    },
-    {
-        timestamps: true,
     }
 );
 
-module.exports = mongoose.model('careers', careersSchema);  
+module.exports = mongoose.model('banner', bannerSchema);  

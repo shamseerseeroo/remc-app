@@ -83,7 +83,7 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,ourprojec
  *     security:           
  *       - Bearer: []     
  *     tags:
- *       - blog
+ *       - ourprojects
  *     description: Creates a new ourprojects
  *     produces:
  *       - application/json
