@@ -93,10 +93,26 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,ourprojec
  *         description: ourprojects id to Update
  *         required: true
  *         type: string
- *       - in: body
- *         name: body
- *         description: Updated ourprojects object
+ *       - in: formData
+ *         name: Image
+ *         type: file
+ *         description: The file to upload
+ *       - in: formData
+ *         name: title
+ *         type: string
+ *       - in: formData
+ *         name: description
+ *         type: string
+ *       - in: formData
+ *         name: content
+ *         type: string
  *         required: true
+  *       - in: formData
+ *         name: status
+ *         type: string
+ *       - in: formData
+ *         name: sortorder
+ *         type: string
  *         schema:
  *           $ref: '#/definitions/ourprojects'
  *     responses:
@@ -180,5 +196,26 @@ router.get('/:id',middlewareReponse.verifyToken,ourprojectsController.getourproj
 *       404:
 *         description: ourprojects not found
 */
+router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, ourprojectsController.getourprojectsstatus, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/ourprojects/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - ourprojects
+ *     description: Returns status ourprojects
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of ourprojects       
+ *         schema:
+ *           $ref: '#/definitions/ourprojects'
+ *       400:
+ *         description: Invalid status value 
+ */
 
 module.exports=router;

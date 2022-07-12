@@ -69,6 +69,7 @@ exports.updateservice = async (req, res, next) => {
       updateItem.updateddate = new Date();
      
       updateItem.sortorder = req.body.sortorder
+      updateItem.status = req.body.status
 
       updateItem.save((err) => {
 
@@ -196,6 +197,27 @@ exports.getbyslug = async (req, res, next) => {
     debug('Error occured while fetching perticular service');
   }
 }
+exports.getservicestatus= async (req,res, next)=>{
+  servicemanagment
+    .find({
+    status: true
+}).sort({
+    sortorder: 1
+})
+.then(function (list) {
+    res.json({
+        status: "success",
+        message: "testimonial retrieved successfully",
+        data: list
+    });
+})
+.catch((err) => {
+    res.json({
+        status: "error",
+        message: err,
+    });
+})
+}     
 
 
 

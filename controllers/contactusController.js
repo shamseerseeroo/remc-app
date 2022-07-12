@@ -168,4 +168,24 @@ exports.getcontactusbyid = async (req, res, next) => {
       });
     }
   })
-}        
+}  
+exports.getcontactusstatus= async (req,res, next)=>{
+  Contactus.find({
+    status: true
+}).sort({
+    sortorder: 1
+})
+.then(function (list) {
+    res.json({
+        status: "success",
+        message: "testimonial retrieved successfully",
+        data: list
+    });
+})
+.catch((err) => {
+    res.json({
+        status: "error",
+        message: err,
+    });
+})
+}           

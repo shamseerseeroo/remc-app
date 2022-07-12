@@ -74,6 +74,7 @@ exports.updatecareer = async (req, res, next) => {
         updateItem.Image = req.file.filename
         }
         updateItem.sortorder = req.body.sortorder;
+        updateItem.status = req.body.status
         updateItem.createdby = req.body.email
       
         updateItem.save((err) => {
@@ -194,3 +195,23 @@ exports.deletecareer = async (req, res, next) => {
       }
     })
   }        
+  exports.getcareerstatus= async (req,res, next)=>{
+    Careers.find({
+      status: true
+  }).sort({
+      sortorder: 1
+  })
+  .then(function (list) {
+      res.json({
+          status: "success",
+          message: "testimonial retrieved successfully",
+          data: list
+      });
+  })
+  .catch((err) => {
+      res.json({
+          status: "error",
+          message: err,
+      });
+  })
+  }     

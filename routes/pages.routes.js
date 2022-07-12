@@ -59,6 +59,10 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken,pagesContr
  *         type: string
  *         required: true
  *       - in: formData
+ *         name: status
+ *         type: string
+ *         required: true
+ *       - in: formData
  *         name: userId
  *         type: string
  *         required: true
@@ -87,10 +91,25 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,pagesCont
  *         description: pages id to Update
  *         required: true
  *         type: string
- *       - in: body
- *         name: body
- *         description: Updated pages object
- *         required: true
+ *       - in: formData
+ *         name: Image
+ *         type: file
+ *         description: The file to upload
+ *       - in: formData
+ *         name: title
+ *         type: string
+ *       - in: formData
+ *         name: description
+ *         type: string
+ *       - in: formData
+ *         name: sortorder
+ *         type: string
+ *       - in: formData
+ *         name: status
+ *         type: string
+ *       - in: formData
+ *         name: userId
+ *         type: string
  *         schema:
  *           $ref: '#/definitions/pages'
  *     responses:
@@ -202,7 +221,27 @@ router.get('/id/:id',middlewareReponse.verifyToken,pagesController.getpagebyid);
 *       404:
 *         description: pages not found
 */ 
-
+router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, pagesController.getpagesstatus, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/pages/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - pages
+ *     description: Returns status pages
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of pages       
+ *         schema:
+ *           $ref: '#/definitions/pages'
+ *       400:
+ *         description: Invalid status value 
+ */
 
 
 

@@ -58,6 +58,10 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken, ourteamCo
  *         name: sortorder
  *         type: string
  *         required: true
+ *       - in: formData
+ *         name: status
+ *         type: string
+ *         required: true
  *         schema:
  *           $ref: '#/definitions/ourteam'
  *     responses:
@@ -83,10 +87,22 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,ourteamCo
  *         description: ourteam id to Update
  *         required: true
  *         type: string
- *       - in: body
- *         name: body
- *         description: Updated ourteam object
- *         required: true
+ *       - in: formData
+ *         name: Image
+ *         type: file
+ *         description: The file to upload
+ *       - in: formData
+ *         name: Name
+ *         type: string
+ *       - in: formData
+ *         name: description
+ *         type: string
+ *       - in: formData
+ *         name: sortorder
+ *         type: string
+ *       - in: formData
+ *         name: status
+ *         type: string
  *         schema:
  *           $ref: '#/definitions/ourteam'
  *     responses:
@@ -170,5 +186,26 @@ router.get('/:id',middlewareReponse.verifyToken,ourteamController.getourteambyid
 *       404:
 *         description: ourteam not found
 */
+router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, ourteamController.getourteamstatus, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/ourteam/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - ourteam
+ *     description: Returns status ourteam
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of ourteam       
+ *         schema:
+ *           $ref: '#/definitions/ourteam'
+ *       400:
+ *         description: Invalid status value 
+ */
 
 module.exports=router;

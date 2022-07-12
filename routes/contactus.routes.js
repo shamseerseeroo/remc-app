@@ -127,7 +127,7 @@ router.get('/',middlewareResponse.verifyToken,contactusController.getcontactus, 
 router.get('/:id',middlewareResponse.verifyToken,contactusController.getcontactusbyid);
 /**
 * @swagger
-* /api/v1/contactus/{id}: 
+* /api/v1/contactusController/{id}: 
 *   get:
 *     security:           
 *       - Bearer: []
@@ -152,6 +152,26 @@ router.get('/:id',middlewareResponse.verifyToken,contactusController.getcontactu
 *       404:
 *         description: contactus not found
 */ 
-
+router.get('/status/', middlewareResponse.verifyToken, contactusController.getcontactusstatus, middlewareResponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/contactus/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - contactus
+ *     description: Returns status contactus
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of contactus       
+ *         schema:
+ *           $ref: '#/definitions/contactus'
+ *       400:
+ *         description: Invalid status value 
+ */
 
 module.exports=router;

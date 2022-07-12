@@ -9,7 +9,7 @@ const upload = require('../middleware/clientlistingupload');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const sharp= require("sharp")
+const sharp = require("sharp")
 
 exports.create = async (req, res, next) => {
   console.log("hiii")
@@ -19,8 +19,9 @@ exports.create = async (req, res, next) => {
     description: req.body.description,
     Image: req.file.filename,
     sortorder: req.body.sortorder,
+    status: req.body.status,
     createdby: req.body.userId,
-    status:req.body.status
+    status: req.body.status
   });
   console.log(req.body);
   console.log(res.data)
@@ -35,8 +36,8 @@ exports.create = async (req, res, next) => {
       })
       return res.status(201).json({
         status: "success",
-                message: "clientlisting retrieved successfully",
-                data: res.data
+        message: "clientlisting retrieved successfully",
+        data: res.data
       });
     } catch (error) {
       console.error(error);
@@ -47,53 +48,54 @@ exports.create = async (req, res, next) => {
   throw new Error();
 }
 exports.updateclientlisting = async (req, res, next) => {
-    clientlistingModel.findById(req.params.id, (err, updateItem) => {
-    
+  clientlistingModel.findById(req.params.id, (err, updateItem) => {
+
     if (err) {
-        res.json({
-            status: "error",
-            message: err,
-        });
-    } else {   
-      if(req.file){
-        const path = './uploads/clientlisting/'+updateItem.Image
+      res.json({
+        status: "error",
+        message: err,
+      });
+    } else {
+      if (req.file) {
+        const path = './uploads/clientlisting/' + updateItem.Image
 
         try {
           fs.unlinkSync(path)
           //file removed
-        } catch(err) {
+        } catch (err) {
           console.error(err)
         }
       }
-        
-        updateItem.name = req.body.name;
-        updateItem.description = req.body.description;
-        updateItem.updateddate = new Date();
-        if(req.file){
-          updateItem.Image = req.file.filename
+
+      updateItem.name = req.body.name;
+      updateItem.description = req.body.description;
+      updateItem.updateddate = new Date();
+      if (req.file) {
+        updateItem.Image = req.file.filename
+      }
+      updateItem.sortorder = req.body.sortorder;
+      updateItem.status = req.body.status
+      updateItem.createdby = req.body.userId
+
+      updateItem.save((err) => {
+
+        if (err) {
+          res.json({
+            status: "error",
+            message: err,
+          });
+        } else {
+          res.json({
+            status: "success",
+            message: 'Updated Successfully',
+            data: updateItem
+          });
         }
-        updateItem.sortorder = req.body.sortorder;
-        updateItem.createdby = req.body.userId
-      
-        updateItem.save((err) => {
 
-            if (err) {
-                res.json({
-                    status: "error",
-                    message: err,
-                });
-            } else {
-                res.json({
-                    status: "success",
-                    message: 'Updated Successfully',
-                    data: updateItem
-                });
-            }
-
-        });
+      });
     }
 
-});
+  });
 }
 exports.deleteclientlisting = async (req, res, next) => {
   console.log(req.params.id)
@@ -130,60 +132,80 @@ exports.deleteclientlisting = async (req, res, next) => {
     });
   })
 }
-    // exports.getpage = async (req, res, next) => {
-    //   const filterResponse = await commonMethods.filterResponse(req.query);
+// exports.getpage = async (req, res, next) => {
+//   const filterResponse = await commonMethods.filterResponse(req.query);
 
-    //   const serviceRes = await Service.getAll(filterResponse);
-    //   const totalCount = await Service.totalCount();
-    //   if (serviceRes) {
+//   const serviceRes = await Service.getAll(filterResponse);
+//   const totalCount = await Service.totalCount();
+//   if (serviceRes) {
 
-  //       const response = {
-  //         count: totalCount,
-  //         data: pageRes,
-  //       };
-  //       res.data = response;
+//       const response = {
+//         count: totalCount,
+//         data: pageRes,
+//       };
+//       res.data = response;
 
-  //       return next();
-  //     } else {
-  //       debug('Error occured while fetching all pages');
-  //       throw new Error();
-  //     }
-  //   }
-  exports.getclientlistingbyid = async (req, res, next) => {
-    const clientlistingdata = await clientlistingModel.findOne({ _id: req.params.id }, (err, result) => {
-      
-      console.log(result.Image)
-      result.Image = "http://localhost:3000/clientlisting/"+result.Image 
-         console.log(result.Image)
-      console.log(result)
-      if (err) {
-        consosle.log(err)
-        res.json({        status: "error",
-          message: err,
-        });
-      } else {
-        res.json({
-          status: "success",
-          message: 'clientlisting details loading..',
-          data: result
-        });
-      }
+//       return next();
+//     } else {
+//       debug('Error occured while fetching all pages');
+//       throw new Error();
+//     }
+//   }
+exports.getclientlistingbyid = async (req, res, next) => {
+  const clientlistingdata = await clientlistingModel.findOne({ _id: req.params.id }, (err, result) => {
+
+    console.log(result.Image)
+    result.Image = "http://localhost:3000/clientlisting/" + result.Image
+    console.log(result.Image)
+    console.log(result)
+    if (err) {
+      consosle.log(err)
+      res.json({
+        status: "error",
+        message: err,
+      });
+    } else {
+      res.json({
+        status: "success",
+        message: 'clientlisting details loading..',
+        data: result
+      });
+    }
+  })
+}
+exports.getclientlisting = async (req, res, next) => {
+  const data = await clientlistingModel.find({ delstatus: false }, (err, result) => {
+    console.log(result);
+    if (result) {
+      const response = {
+        data: result
+      };
+      res.data = response;
+
+      return next();
+    } else {
+      debug('Error occured while fetching all pages');
+      throw new Error();
+    }
+  })
+}
+exports.getclientlistingstatus = async (req, res, next) => {
+  clientlistingModel.find({
+    status: true
+  }).sort({
+    sortorder: 1
+  })
+    .then(function (list) {
+      res.json({
+        status: "success",
+        message: "testimonial retrieved successfully",
+        data: list
+      });
     })
-  }
-  exports.getclientlisting = async (req, res, next) => {
-    const data = await clientlistingModel.find({ delstatus: false }, (err, result) => {
-      console.log(result);
-      if (result) {
-        const response = {
-          data: result
-        };
-        res.data = response;
-  
-        return next();
-      } else {
-        debug('Error occured while fetching all pages');
-        throw new Error();
-      }
+    .catch((err) => {
+      res.json({
+        status: "error",
+        message: err,
+      });
     })
-          }
- 
+}     

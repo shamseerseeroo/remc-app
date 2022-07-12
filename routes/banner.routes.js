@@ -65,6 +65,10 @@ router.post('/', upload.single('Image'), middlewareReponse.verifyToken, bannerCo
  *         type: string
  *         required: true
  *       - in: formData
+ *         name: status
+ *         type: string
+ *         required: true
+ *       - in: formData
  *         name: userId
  *         type: string
  *         required: true
@@ -101,10 +105,31 @@ router.put('/:id', upload.single('Image'), middlewareReponse.verifyToken, banner
 *         description: banner id to Update
 *         required: true
 *         type: string
-*       - in: body
-*         name: body
-*         description: Updated banner object
-*         required: true
+*       - in: formData
+*         name: Image
+*         type: file
+*         description: The file to upload
+*       - in: formData
+*         name: title
+*         type: string
+*       - in: formData
+*         name: description
+*         type: string
+*       - in: formData
+*         name: sortorder
+*         type: string
+*       - in: formData
+*         name: status
+*         type: string
+*       - in: formData
+*         name: userId
+*         type: string
+*       - in: formData
+*         name: buttonurl
+*         type: string
+*       - in: formData
+*         name: buttontext
+*         type: string
 *         schema:
 *           $ref: '#/definitions/banner'
 *     responses:
@@ -188,5 +213,25 @@ router.get('/id/:id', middlewareReponse.verifyToken, bannerController.getbannerb
 *       404:
 *         description: banner not found
 */
-
+router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, bannerController.getbannerstatus, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/banner/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - banner
+ *     description: Returns status banner
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of bannner       
+ *         schema:
+ *           $ref: '#/definitions/banner'
+ *       400:
+ *         description: Invalid status value 
+ */
 module.exports = router;

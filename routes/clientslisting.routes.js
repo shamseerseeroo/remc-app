@@ -57,6 +57,10 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken, clientlis
  *         type: string
  *         required: true
  *       - in: formData
+ *         name: status
+ *         type: string
+ *         required: true
+ *       - in: formData
  *         name: sortorder
  *         type: string
  *         required: true
@@ -89,10 +93,25 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,clientlis
  *         description: clientlisting id to Update
  *         required: true
  *         type: string
- *       - in: body
- *         name: body
- *         description: Updated clientlisting object
- *         required: true
+ *       - in: formData
+ *         name: Image
+ *         type: file
+ *         description: The file to upload
+ *       - in: formData
+ *         name: name
+ *         type: string
+ *       - in: formData
+ *         name: description
+ *         type: string
+ *       - in: formData
+ *         name: status
+ *         type: string
+ *       - in: formData
+ *         name: sortorder
+ *         type: string
+ *       - in: formData
+ *         name: userId
+ *         type: string
  *         schema:
  *           $ref: '#/definitions/clientlisting'
  *     responses:
@@ -176,5 +195,26 @@ router.get('/:id',middlewareReponse.verifyToken,clientlistingController.getclien
 *       404:
 *         description: clientlist not found
 */ 
+router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, clientlistingController.getclientlistingstatus, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/clientlisting/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - clientlisting
+ *     description: Returns status clientlisting
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of clientlisting       
+ *         schema:
+ *           $ref: '#/definitions/clientlisting'
+ *       400:
+ *         description: Invalid status value 
+ */
 
 module.exports=router;

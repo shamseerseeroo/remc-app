@@ -8,7 +8,7 @@ var bannerSchema = new Schema(
         },
         description: {
             type: String
-            
+
         },
         delstatus: {
             type: Boolean,
@@ -23,7 +23,7 @@ var bannerSchema = new Schema(
         sortorder: {
             type: Number,
             default: "",
-          },
+        },
         Image: {
             type: String,
             required: false,
@@ -37,14 +37,10 @@ var bannerSchema = new Schema(
             type: Date,
             default: Date.now
         },
-        updatedby: {
-            type: String,
-            default: null
-        },
-        buttonurl:{
+        buttonurl: {
             type: String
         },
-        buttontext:{
+        buttontext: {
             type: String
         }
 

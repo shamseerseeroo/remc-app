@@ -21,6 +21,7 @@ exports.create = async (req, res, next) => {
     Image: req.file.filename,
     createdby: req.body.userId,
     sortorder: req.body.sortorder,
+    status: req.body.status,
     buttonurl: req.body.buttonurl,
     buttontext: req.body.buttontext
 
@@ -50,7 +51,7 @@ exports.create = async (req, res, next) => {
   throw new Error();
 }
 exports.updatebanner = async (req, res, next) => {
-  Blog.findById(req.params.id, (err, updateItem) => {
+  Banner.findById(req.params.id, (err, updateItem) => {
     
     if (err) {
         res.json({
@@ -78,6 +79,7 @@ exports.updatebanner = async (req, res, next) => {
         }
         updateItem.sortorder = req.body.sortorder;
         updateItem.createdby = req.body.email
+        updateItem.sttaus = req.body.status
         updateItem.buttonurl = req.body.buttonurl ,
         updateItem.buttontext = req.body.buttontext 
       
@@ -197,4 +199,24 @@ exports.deletebanner = async (req, res, next) => {
         });
       }
     })
-  }        
+  }   
+  exports.getbannerstatus= async (req,res, next)=>{
+    Banner.find({
+      status: true
+  }).sort({
+      sortorder: 1
+  })
+  .then(function (list) {
+      res.json({
+          status: "success",
+          message: "testimonial retrieved successfully",
+          data: list
+      });
+  })
+  .catch((err) => {
+      res.json({
+          status: "error",
+          message: err,
+      });
+  })
+  }     

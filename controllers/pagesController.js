@@ -19,6 +19,7 @@ exports.create = async (req, res, next) => {
   res.data = await pagesService.create({
     title: req.body.title,
     description: req.body.description,
+    status: req.body.status,
     Image: req.file.filename,
     createdby: req.body.userId
   });
@@ -70,6 +71,7 @@ exports.updatepage = async (req, res, next) => {
         }
       }
       updateItem.title = req.body.title;
+      updateItem.status = req.body.status;
       if(req.file){
         updateItem.Image = req.file.filename
       }
@@ -211,7 +213,26 @@ exports.getbyslug = async (req, res, next) => {
     debug('Error occured while fetching perticular todo');
   }
 }
-
+exports.getpagesstatus= async (req,res, next)=>{
+  pages.find({
+    status: true
+}).sort({
+    sortorder: 1
+})
+.then(function (list) {
+    res.json({
+        status: "success",
+        message: "testimonial retrieved successfully",
+        data: list
+    });
+})
+.catch((err) => {
+    res.json({
+        status: "error",
+        message: err,
+    });
+})
+}     
 
 
 

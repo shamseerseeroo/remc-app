@@ -68,6 +68,9 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken, blogContr
  *         name: userId
  *         type: string
  *       - in: formData
+ *         name: status
+ *         type: string
+ *       - in: formData
  *         name: seotitle
  *         type: string
  *       - in: formData
@@ -106,10 +109,37 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,blogContr
  *         description: blog id to Update
  *         required: true
  *         type: string
- *       - in: body
- *         name: body
- *         description: Updated blog object
- *         required: true
+ *       - in: formData
+ *         name: Image
+ *         type: file
+ *         description: The file to upload
+ *       - in: formData
+ *         name: title
+ *         type: string
+ *       - in: formData
+ *         name: content
+ *         type: string
+ *       - in: formData
+ *         name: sortorder
+ *         type: string
+ *       - in: formData
+ *         name: userId
+ *         type: string
+ *       - in: formData
+ *         name: status
+ *         type: string
+ *       - in: formData
+ *         name: seotitle
+ *         type: string
+ *       - in: formData
+ *         name: metatitle
+ *         type: string
+ *       - in: formData
+ *         name: metadescription
+ *         type: string
+ *       - in: formData
+ *         name: tag
+ *         type: string
  *         schema:
  *           $ref: '#/definitions/blog'
  *     responses:
@@ -193,5 +223,26 @@ router.get('/id/:id',middlewareReponse.verifyToken,blogController.getblogbyid);
 *       404:
 *         description: blog not found
 */ 
+router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, blogController.getblogstatus, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/blog/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - blog
+ *     description: Returns status blog
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of blog       
+ *         schema:
+ *           $ref: '#/definitions/blog'
+ *       400:
+ *         description: Invalid status value 
+ */
 
 module.exports=router;

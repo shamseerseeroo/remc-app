@@ -21,6 +21,7 @@ exports.create = async (req, res, next) => {
     Image: req.file.filename,
     createdby: req.body.userId,
     sortorder: req.body.sortorder,
+    status: req.body.status,
     tag : req.body.tag ,
     seotitle : req.body.seotitle ,
     metatitle : req.body.metatitle ,
@@ -80,6 +81,7 @@ exports.updateblog = async (req, res, next) => {
         }
         updateItem.sortorder = req.body.sortorder;
         updateItem.createdby = req.body.email
+        updateItem.status = req.body.status
         updateItem.tag = req.body.tag ,
         updateItem.seotitle = req.body.seotitle ,
         updateItem.metatitle = req.body.metatitle ,
@@ -202,3 +204,23 @@ exports.deleteblog = async (req, res, next) => {
       }
     })
   }        
+  exports.getblogstatus= async (req,res, next)=>{
+    Blog.find({
+      status: true
+  }).sort({
+      sortorder: 1
+  })
+  .then(function (list) {
+      res.json({
+          status: "success",
+          message: "testimonial retrieved successfully",
+          data: list
+      });
+  })
+  .catch((err) => {
+      res.json({
+          status: "error",
+          message: err,
+      });
+  })
+  }     

@@ -63,6 +63,9 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken, careersCo
  *       - in: formData
  *         name: userId
  *         type: string
+ *       - in: formData
+ *         name: status
+ *         type: string
  *         required: true
  *         schema:
  *           $ref: '#/definitions/career'
@@ -89,10 +92,25 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,careersCo
  *         description: career id to Update
  *         required: true
  *         type: string
- *       - in: body
- *         name: body
- *         description: Updated career object
- *         required: true
+ *       - in: formData
+ *         name: Image
+ *         type: file
+ *         description: The file to upload
+ *       - in: formData
+ *         name: title
+ *         type: string
+ *       - in: formData
+ *         name: description
+ *         type: string
+ *       - in: formData
+ *         name: status
+ *         type: string
+ *       - in: formData
+ *         name: sortorder
+ *         type: string
+ *       - in: formData
+ *         name: userId
+ *         type: string
  *         schema:
  *           $ref: '#/definitions/career'
  *     responses:
@@ -176,5 +194,26 @@ router.get('/id/:id',middlewareReponse.verifyToken,careersController.getcareersb
 *       404:
 *         description: career not found
 */ 
+router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, careersController.getcareerstatus, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/career/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - career
+ *     description: Returns status career
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of career       
+ *         schema:
+ *           $ref: '#/definitions/career'
+ *       400:
+ *         description: Invalid status value 
+ */
 
 module.exports=router;

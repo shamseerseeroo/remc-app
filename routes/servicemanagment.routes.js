@@ -64,6 +64,10 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken, servicema
  *         type: string
  *         required: true
  *       - in: formData
+ *         name: status
+ *         type: string
+ *         required: true
+ *       - in: formData
  *         name: userId
  *         type: string
  *         required: true
@@ -92,10 +96,25 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,servicema
  *         description: service id to Update
  *         required: true
  *         type: string
- *       - in: body
- *         name: body
- *         description: Updated service object
- *         required: true
+ *       - in: formData
+ *         name: Image
+ *         type: file
+ *         description: The file to upload
+ *       - in: formData
+ *         name: title
+ *         type: string
+ *       - in: formData
+ *         name: description
+ *         type: string
+ *       - in: formData
+ *         name: sortorder
+ *         type: string
+ *       - in: formData
+ *         name: status
+ *         type: string
+ *       - in: formData
+ *         name: userId
+ *         type: string
  *         schema:
  *           $ref: '#/definitions/service'
  *     responses:
@@ -207,6 +226,26 @@ router.get('/:slug',middlewareReponse.verifyToken,servicemanagmentController.get
 *       404:
 *         description: service not found
 */ 
-
+router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, servicemanagmentController.getservicestatus, middlewareReponse.getByIdResponse);
+/**
+ * @swagger
+ * /api/v1/service/status/:
+ *   get:
+ *     security:           
+ *       - Bearer: []
+ *     tags:
+ *       - service
+ *     description: Returns status service
+ *     produces:
+ *       - application/json
+ *     parameters: []
+ *     responses:
+ *       200:
+ *         description: An array of service       
+ *         schema:
+ *           $ref: '#/definitions/service'
+ *       400:
+ *         description: Invalid status value 
+ */
 
 module.exports=router;
