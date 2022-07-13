@@ -152,13 +152,11 @@ router.get('/:id',middlewareResponse.verifyToken,contactusController.getcontactu
 *       404:
 *         description: contactus not found
 */ 
-router.get('/status/', middlewareResponse.verifyToken, contactusController.getcontactusstatus, middlewareResponse.getByIdResponse);
+router.get('/list/status/',  contactusController.getcontactusstatus, middlewareResponse.getByIdResponse);
 /**
  * @swagger
- * /api/v1/contactus/status/:
+ * /api/v1/contactus/list/status/:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - contactus
  *     description: Returns status contactus

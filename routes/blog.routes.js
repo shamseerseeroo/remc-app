@@ -174,13 +174,11 @@ router.delete('/:id', middlewareReponse.verifyToken,blogController.deleteblog, m
  *         description: blog not found   
  * 
  */
-router.get('/',upload.single('Image'),middlewareReponse.verifyToken,blogController.getblog, middlewareReponse.getByIdResponse);
+router.get('/',blogController.getblog, middlewareReponse.getByIdResponse);
 /**
  * @swagger
  * /api/v1/blog:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - blog
  *     description: Returns all blog
@@ -223,13 +221,11 @@ router.get('/id/:id',middlewareReponse.verifyToken,blogController.getblogbyid);
 *       404:
 *         description: blog not found
 */ 
-router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, blogController.getblogstatus, middlewareReponse.getByIdResponse);
+router.get('/status/',  blogController.getblogstatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
  * /api/v1/blog/status/:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - blog
  *     description: Returns status blog

@@ -213,13 +213,11 @@ router.get('/id/:id', middlewareReponse.verifyToken, bannerController.getbannerb
 *       404:
 *         description: banner not found
 */
-router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, bannerController.getbannerstatus, middlewareReponse.getByIdResponse);
+router.get('/status/',  bannerController.getbannerstatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
  * /api/v1/banner/status/:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - banner
  *     description: Returns status banner

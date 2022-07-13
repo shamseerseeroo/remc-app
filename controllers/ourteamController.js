@@ -185,7 +185,7 @@ exports.getourteambyid = async (req, res, next) => {
     }
   })
 }         
-exports.getourteamstatus= async (req,res, next)=>{
+exports.getourteamsstatus= async (req,res, next)=>{
   Ourteam.find({
     status: true
 }).sort({

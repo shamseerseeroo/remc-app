@@ -153,8 +153,7 @@ exports.deleteclientlisting = async (req, res, next) => {
 //   }
 exports.getclientlistingbyid = async (req, res, next) => {
   const clientlistingdata = await clientlistingModel.findOne({ _id: req.params.id }, (err, result) => {
-
-    console.log(result.Image)
+                                                                                  
     result.Image = "http://localhost:3000/clientlisting/" + result.Image
     console.log(result.Image)
     console.log(result)
@@ -189,23 +188,25 @@ exports.getclientlisting = async (req, res, next) => {
     }
   })
 }
-exports.getclientlistingstatus = async (req, res, next) => {
+exports.getclientlistingstatus= async (req,res, next)=>{
+  console.log("status")
   clientlistingModel.find({
     status: true
-  }).sort({
+}).sort({
     sortorder: 1
-  })
-    .then(function (list) {
-      res.json({
+})
+.then(function (list) {
+   console.log(list)
+    res.json({
         status: "success",
         message: "testimonial retrieved successfully",
         data: list
-      });
-    })
-    .catch((err) => {
-      res.json({
+    });
+})
+.catch((err) => {
+    res.json({
         status: "error",
         message: err,
-      });
-    })
-}     
+    });
+})
+}

@@ -186,13 +186,11 @@ router.get('/:id',middlewareReponse.verifyToken,ourteamController.getourteambyid
 *       404:
 *         description: ourteam not found
 */
-router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, ourteamController.getourteamstatus, middlewareReponse.getByIdResponse);
+router.get('/team/status/',  ourteamController.getourteamsstatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
- * /api/v1/ourteam/status/:
+ * /api/v1/ourteam/team/status/:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - ourteam
  *     description: Returns status ourteam

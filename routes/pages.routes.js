@@ -221,13 +221,11 @@ router.get('/id/:id',middlewareReponse.verifyToken,pagesController.getpagebyid);
 *       404:
 *         description: pages not found
 */ 
-router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, pagesController.getpagesstatus, middlewareReponse.getByIdResponse);
+router.get('/page/status/',  pagesController.getpagesstatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
- * /api/v1/pages/status/:
+ * /api/v1/pages/page/status/:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - pages
  *     description: Returns status pages

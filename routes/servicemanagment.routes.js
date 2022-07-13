@@ -226,13 +226,11 @@ router.get('/:slug',middlewareReponse.verifyToken,servicemanagmentController.get
 *       404:
 *         description: service not found
 */ 
-router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, servicemanagmentController.getservicestatus, middlewareReponse.getByIdResponse);
+router.get('/list/status/',  servicemanagmentController.getservicestatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
- * /api/v1/service/status/:
+ * /api/v1/service/list/status/:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - service
  *     description: Returns status service

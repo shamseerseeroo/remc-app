@@ -196,13 +196,11 @@ router.get('/:id',middlewareReponse.verifyToken,ourprojectsController.getourproj
 *       404:
 *         description: ourprojects not found
 */
-router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, ourprojectsController.getourprojectsstatus, middlewareReponse.getByIdResponse);
+router.get('/project/status/',  ourprojectsController.getourprojectsstatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
- * /api/v1/ourprojects/status/:
+ * /api/v1/ourprojects/project/status/:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - ourprojects
  *     description: Returns status ourprojects

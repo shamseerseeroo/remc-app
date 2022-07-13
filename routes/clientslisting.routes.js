@@ -195,13 +195,11 @@ router.get('/:id',middlewareReponse.verifyToken,clientlistingController.getclien
 *       404:
 *         description: clientlist not found
 */ 
-router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, clientlistingController.getclientlistingstatus, middlewareReponse.getByIdResponse);
+router.get('/client/status',   clientlistingController.getclientlistingstatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
- * /api/v1/clientlisting/status/:
+ * /api/v1/clientlisting/client/status:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - clientlisting
  *     description: Returns status clientlisting

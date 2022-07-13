@@ -194,13 +194,11 @@ router.get('/id/:id',middlewareReponse.verifyToken,careersController.getcareersb
 *       404:
 *         description: career not found
 */ 
-router.get('/status/', upload.single('Image'), middlewareReponse.verifyToken, careersController.getcareerstatus, middlewareReponse.getByIdResponse);
+router.get('/status/',  careersController.getcareerstatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
  * /api/v1/career/status/:
  *   get:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - career
  *     description: Returns status career
