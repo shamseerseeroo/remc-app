@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const sharp= require("sharp")
+const config = require('../config/config');
 
 
 
@@ -207,6 +208,9 @@ exports.deletebanner = async (req, res, next) => {
       sortorder: 1
   })
   .then(function (list) {
+    list.filter(data=>{
+      data.Image = config.api.BASE_URL+ "banner/" + data.Image;
+      })
       res.json({
           status: "success",
           message: "testimonial retrieved successfully",

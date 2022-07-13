@@ -197,6 +197,9 @@ exports.getclientlistingstatus= async (req,res, next)=>{
 })
 .then(function (list) {
    console.log(list)
+   list.filter(data=>{
+    data.Image = config.api.BASE_URL+ "clientlisting/" + data.Image;
+    })
     res.json({
         status: "success",
         message: "testimonial retrieved successfully",

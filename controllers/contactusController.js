@@ -176,6 +176,9 @@ exports.getcontactusstatus= async (req,res, next)=>{
     sortorder: 1
 })
 .then(function (list) {
+  list.filter(data=>{
+    data.Image = config.api.BASE_URL+ "contactus/" + data.Image;
+    })
     res.json({
         status: "success",
         message: "testimonial retrieved successfully",

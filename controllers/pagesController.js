@@ -220,6 +220,9 @@ exports.getpagesstatus= async (req,res, next)=>{
     sortorder: 1
 })
 .then(function (list) {
+  list.filter(data=>{
+    data.Image = config.api.BASE_URL+ "pages/" + data.Image;
+    })
     res.json({
         status: "success",
         message: "testimonial retrieved successfully",
