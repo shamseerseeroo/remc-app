@@ -171,6 +171,10 @@ exports.deleteblog = async (req, res, next) => {
               sortorder: 1
           })
           .then(function (list) {
+            list.filter(data=>{
+              data.Image = config.api.BASE_URL+ "blog/" + data.Image;
+              data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
+            })
               res.json({
                   status: "success",
                   message: "testimonial retrieved successfully",
@@ -214,6 +218,7 @@ exports.deleteblog = async (req, res, next) => {
   .then(function (list) {
          list.filter(data=>{
       data.Image = config.api.BASE_URL+ "blog/" + data.Image;
+      data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
       })
       res.json({
           status: "success",
