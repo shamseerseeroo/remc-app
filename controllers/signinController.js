@@ -22,15 +22,15 @@ const signin = {
       const { email, password } = req.body
       console.log(req.body)
       if (!(email && password)) {
-        return res.status(401).send({status:false,messege:"All input are required"});
+        return res.status(403).send({status:false,messege:"All input are required"});
       }
       const user = await User.findOne({ email: email });
       if (!user) {
-        return res.status(401).send({status:false,messege:"invalid email"});
+        return res.status(403).send({status:false,messege:"invalid email"});
       }
       const userpassword = await bcrypt.compare(password, user.password)
       if (!userpassword) {
-        return res.status(401).send({status:false,messege:"invalid pasword"});
+        return res.status(403).send({status:false,messege:"invalid pasword"});
       }
       if (user && userpassword) {
         // Create token
