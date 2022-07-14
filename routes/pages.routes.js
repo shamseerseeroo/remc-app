@@ -165,13 +165,11 @@ router.get('/',upload.single('Image'),middlewareReponse.verifyToken,pagesControl
  *       400:
  *         description: Invalid status value 
  */
-router.get('/:slug',middlewareReponse.verifyToken,pagesController.getbyslug, middlewareReponse.getByIdResponse);
+router.get('/:slug',pagesController.getbyslug, middlewareReponse.getByIdResponse);
 /**
 * @swagger
 * /api/v1/pages/{slug}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - pages
 *     description: get a single slug
