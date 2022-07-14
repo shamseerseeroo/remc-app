@@ -68,6 +68,9 @@ router.post('/', upload.single('Image'),middlewareReponse.verifyToken, blogContr
  *         name: userId
  *         type: string
  *       - in: formData
+ *         name: clientId
+ *         type: string
+ *       - in: formData
  *         name: status
  *         type: string
  *       - in: formData
@@ -124,6 +127,9 @@ router.put('/:id',upload.single('Image'),middlewareReponse.verifyToken,blogContr
  *         type: string
  *       - in: formData
  *         name: userId
+ *         type: string
+ *       - in: formData
+ *         name: clientId
  *         type: string
  *       - in: formData
  *         name: status

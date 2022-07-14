@@ -29,6 +29,12 @@ var blogSchema = new Schema(
             required: false,
             default: null
         },
+        client: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Clientlisting',
+            default: null,
+            index: true
+        },
         tag : {
             type: String
         },

@@ -21,6 +21,7 @@ exports.create = async (req, res, next) => {
     Image: req.file.filename,
     createdby: req.body.userId,
     sortorder: req.body.sortorder,
+    client:req.body.clientId,
     status: req.body.status,
     tag : req.body.tag ,
     seotitle : req.body.seotitle ,
@@ -82,6 +83,7 @@ exports.updateblog = async (req, res, next) => {
         updateItem.sortorder = req.body.sortorder;
         updateItem.createdby = req.body.email
         updateItem.status = req.body.status
+        updateItem.client = req.body.clientId
         updateItem.tag = req.body.tag ,
         updateItem.seotitle = req.body.seotitle ,
         updateItem.metatitle = req.body.metatitle ,
@@ -207,7 +209,7 @@ exports.deleteblog = async (req, res, next) => {
   exports.getblogstatus= async (req,res, next)=>{
     Blog.find({
       status: true
-  }).sort({
+  }).populate("client").sort({
       sortorder: 1
   })
   .then(function (list) {
