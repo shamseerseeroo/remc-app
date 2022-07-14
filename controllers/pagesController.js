@@ -207,12 +207,27 @@ exports.getpagebyid = async (req, res, next) => {
   })
 }
 exports.getbyslug = async (req, res, next) => {
-  res.data = await pagesService.getByslug(req.params.slug);
-  if (res.data) {
-    return next();
-  } else {
-    debug('Error occured while fetching perticular todo');
-  }
+  pages.find({
+    delstatus: false
+  }).sort({
+    sortorder: 1
+  })
+    .then(function (list) {
+      list.filter(data=>{
+        data.Image = config.api.BASE_URL+ "pages/" + data.Image;
+        })
+      res.json({
+        status: "success",
+        message: "testimonial retrieved successfully",
+        data: list
+      });
+    })
+    .catch((err) => {
+      res.json({
+        status: "error",
+        message: err,
+      });
+    })
 }
 exports.getpagesstatus= async (req,res, next)=>{
   pages.find({
