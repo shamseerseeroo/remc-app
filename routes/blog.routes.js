@@ -185,6 +185,8 @@ router.get('/',blogController.getblog, middlewareReponse.getByIdResponse);
  * @swagger
  * /api/v1/blog:
  *   get:
+ *     security:           
+ *       - Bearer: []
  *     tags:
  *       - blog
  *     description: Returns all blog

@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const sharp= require("sharp")
 const fs = require('fs');
+const config = require('../config/config');
 
 exports.create = async (req, res, next) => {
   res.data = await Service.create({
@@ -198,13 +199,16 @@ exports.getbyslug = async (req, res, next) => {
   }
 }
 exports.getservicestatus= async (req,res, next)=>{
+  console.log("hi")
   servicemanagment
     .find({
+    delstatus: false,  
     status: true
 }).sort({
     sortorder: 1
 })
 .then(function (list) {
+  console.log(list)
   list.filter(data=>{
     data.Image = config.api.BASE_URL+ "service/" + data.Image;
     })

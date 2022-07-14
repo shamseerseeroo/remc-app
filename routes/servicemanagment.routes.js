@@ -226,10 +226,10 @@ router.get('/:slug',middlewareReponse.verifyToken,servicemanagmentController.get
 *       404:
 *         description: service not found
 */ 
-router.get('/list/status/',  servicemanagmentController.getservicestatus, middlewareReponse.getByIdResponse);
+router.get('/list/status',  servicemanagmentController.getservicestatus, middlewareReponse.getByIdResponse);
 /**
  * @swagger
- * /api/v1/service/list/status/:
+ * /api/v1/service/list/status:
  *   get:
  *     tags:
  *       - service

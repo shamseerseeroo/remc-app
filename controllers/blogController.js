@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const sharp= require("sharp")
-
+const config = require('../config/config');
 
 
 exports.create = async (req, res, next) => {
@@ -208,12 +208,11 @@ exports.deleteblog = async (req, res, next) => {
   }        
   exports.getblogstatus= async (req,res, next)=>{
     Blog.find({
+      delstatus: false,
       status: true
-  }).populate("client").sort({
-      sortorder: 1
-  })
+  }).populate('client')
   .then(function (list) {
-    list.filter(data=>{
+         list.filter(data=>{
       data.Image = config.api.BASE_URL+ "blog/" + data.Image;
       })
       res.json({
@@ -222,6 +221,21 @@ exports.deleteblog = async (req, res, next) => {
           data: list
       });
   })
+  //   Blog.find({
+  //     status: true
+  // }).populate("client").sort({
+  //     sortorder: 1
+  // })
+  // .then(function (list) {
+  //   list.filter(data=>{
+  //     data.Image = config.api.BASE_URL+ "blog/" + data.Image;
+  //     })
+  //     res.json({
+  //         status: "success",
+  //         message: "testimonial retrieved successfully",
+  //         data: list
+  //     });
+  // })
   .catch((err) => {
       res.json({
           status: "error",

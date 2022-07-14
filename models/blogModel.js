@@ -31,7 +31,7 @@ var blogSchema = new Schema(
         },
         client: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Clientlisting',
+            ref: 'clientlisting',
             default: null,
             index: true
         },
