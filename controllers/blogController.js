@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const sharp= require("sharp")
 const config = require('../config/config');
+const mongoose = require('mongoose');
 
 
 exports.create = async (req, res, next) => {
@@ -21,7 +22,7 @@ exports.create = async (req, res, next) => {
     Image: req.file.filename,
     createdby: req.body.userId,
     sortorder: req.body.sortorder,
-    client:req.body.clientId,
+    client: mongoose.Types.ObjectId(req.body.clientId),
     status: req.body.status,
     tag : req.body.tag ,
     seotitle : req.body.seotitle ,
@@ -83,7 +84,7 @@ exports.updateblog = async (req, res, next) => {
         updateItem.sortorder = req.body.sortorder;
         updateItem.createdby = req.body.email
         updateItem.status = req.body.status
-        updateItem.client = req.body.clientId
+        updateItem.client = mongoose.Types.ObjectId(req.body.clientId) 
         updateItem.tag = req.body.tag ,
         updateItem.seotitle = req.body.seotitle ,
         updateItem.metatitle = req.body.metatitle ,
@@ -164,13 +165,14 @@ exports.deleteblog = async (req, res, next) => {
   //     }
   //   }
   exports.getblog = (req, res) => {
-
+       console.log("hii")
     Blog.find({
               delstatus: false
           }).populate('client').sort({
               sortorder: 1
           })
           .then(function (list) {
+            console.log(list)
             list.filter(data=>{
               data.Image = config.api.BASE_URL+ "blog/" + data.Image;
               data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
