@@ -168,7 +168,7 @@ router.get('/',upload.single('Image'),middlewareReponse.verifyToken,pagesControl
 router.get('/:slug',middlewareReponse.verifyToken,pagesController.getbyslug, middlewareReponse.getByIdResponse);
 /**
 * @swagger
-* /api/v1/{slug}: 
+* /api/v1/pages/{slug}: 
 *   get:
 *     security:           
 *       - Bearer: []

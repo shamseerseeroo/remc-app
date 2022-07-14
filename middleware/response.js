@@ -54,7 +54,7 @@ const ResponseMiddleWare = {
     let authHeader = req.headers.authorization
     
     if(authHeader==undefined){
-     return res.status(403).send({error:"no token provided"})
+     return res.status(401).send({error:"no token provided"})
     }
     let token=authHeader.split(" ").pop()
     console.log(token)
