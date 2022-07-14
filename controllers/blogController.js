@@ -167,7 +167,7 @@ exports.deleteblog = async (req, res, next) => {
 
     Blog.find({
               delstatus: false
-          }).sort({
+          }).populate('client').sort({
               sortorder: 1
           })
           .then(function (list) {
