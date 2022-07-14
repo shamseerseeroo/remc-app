@@ -6,6 +6,7 @@ const commonMethods = require('../utilities/common');
 const contactusService = new modelService(Contactus);
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const config = require('../config/config');
 
 exports.create = async (req, res, next) => {
  

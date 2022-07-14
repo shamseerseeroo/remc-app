@@ -10,6 +10,7 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const sharp = require("sharp")
+const config = require('../config/config');
 
 exports.create = async (req, res, next) => {
   console.log("hiii")
