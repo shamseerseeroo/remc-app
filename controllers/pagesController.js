@@ -207,19 +207,18 @@ exports.getpagebyid = async (req, res, next) => {
   })
 }
 exports.getbyslug = async (req, res, next) => {
-  pages.find({
-    delstatus: false
-  }).sort({
-    sortorder: 1
+  pages.findOne({
+    delstatus: false,
+    slug: req.params.slug
   })
-    .then(function (list) {
-      list.filter(data=>{
+    .then(function (data) {
+      
         data.Image = config.api.BASE_URL+ "pages/" + data.Image;
-        })
+      
       res.json({
         status: "success",
         message: "testimonial retrieved successfully",
-        data: list
+        data: data
       });
     })
     .catch((err) => {
