@@ -76,7 +76,7 @@ exports.updateblog = async (req, res, next) => {
       }
         
         updateItem.title = req.body.title;
-        updateItem.content = req.body.description;
+        updateItem.content = req.body.content;
         updateItem.updateddate = new Date();
         if(req.file){
         updateItem.Image = req.file.filename
