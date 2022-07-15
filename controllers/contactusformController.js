@@ -1,7 +1,7 @@
 require('express-async-errors');
 const modelService = require('../services/modelService');
 const dotenv = require('dotenv');
-const Contactusform = require('../models/contactusModel');
+const Contactusform = require('../models/contactusformModel');
 const commonMethods = require('../utilities/common');
 const contactusformService = new modelService(Contactusform);
 const bodyParser = require('body-parser');
@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 const config = require('../config/config');
 
 exports.create = async (req, res, next) => {
- 
+  console.log("hii");
   res.data = await contactusformService.create({
     Name: req.body.Name,
     Email: req.body.Email,
