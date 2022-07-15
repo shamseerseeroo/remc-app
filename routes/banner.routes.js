@@ -185,13 +185,11 @@ router.get('/', upload.single('Image'), middlewareReponse.verifyToken, bannerCon
  *       400:
  *         description: Invalid status value 
  */
-router.get('/id/:id', middlewareReponse.verifyToken, bannerController.getbannerbyid);
+router.get('/id/:id', bannerController.getbannerbyid);
 /**
 * @swagger
 * /api/v1/banner/id/{id}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - banner
 *     description: get a single banner

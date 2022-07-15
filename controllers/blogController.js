@@ -172,33 +172,33 @@ exports.deleteblog = async (req, res, next) => {
               sortorder: 1
           })
           .then(function (list) {
-            console.log(list)
-            list.filter(data=>{
-              let appliedclient = [];
-
-              for(let data of list) {
+            let b = []
+            let i = 0;
+            let c = []
+           //    list.filter(data=>{
+           // data.Image = config.api.BASE_URL+ "blog/" + data.Image; 
+           // data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
+           // console.log(data)
+           // })
+           for(let item of list)
+           {
+             c = [...c, item.client.Image]
+           }
+           for(let data of list)
+           {
+             data.Image = config.api.BASE_URL+ "blog/" + data.Image; 
+             data.client.Image= config.api.BASE_URL+ "clientlisting/" + c[i];
+             i++
+           }     
               
-              data.Image = config.api.BASE_URL+ "uploads/blog/" + data.Image;
-              
-              if(!appliedclient.includes(data.client._id))
-              
-              {
-              
-              data.client.Image = config.api.BASE_URL+ "uploads/clientlisting/" +data.client.Image;
-              
-              appliedclient.push(data.client._id);
-              
-              }
-              
-              }
-            })
+            
               res.json({
                   status: "success",
                   message: "testimonial retrieved successfully",
                   data: list
               });
-          })
-          .catch((err) => {
+          
+              })  .catch((err) => {
               res.json({
                   status: "error",
                   message: err,
