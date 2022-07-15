@@ -167,13 +167,11 @@ router.get('/',upload.single('Image'),middlewareReponse.verifyToken,clientlistin
  *       400:
  *         description: Invalid status value 
  */
-router.get('/:id',middlewareReponse.verifyToken,clientlistingController.getclientlistingbyid);
+router.get('/:id',clientlistingController.getclientlistingbyid);
 /**
 * @swagger
 * /api/v1/clientlisting/{id}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - clientlisting
 *     description: get a single clientlisting

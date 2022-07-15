@@ -166,13 +166,11 @@ router.get('/',upload.single('Image'),middlewareReponse.verifyToken,careersContr
  *       400:
  *         description: Invalid status value 
  */
-router.get('/id/:id',middlewareReponse.verifyToken,careersController.getcareersbyid);
+router.get('/id/:id',careersController.getcareersbyid);
 /**
 * @swagger
 * /api/v1/career/id/{id}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - career
 *     description: get a single career

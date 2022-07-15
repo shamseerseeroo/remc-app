@@ -124,13 +124,11 @@ router.get('/',middlewareResponse.verifyToken,contactusController.getcontactus, 
  *       400:
  *         description: Invalid status value 
  */
-router.get('/:id',middlewareResponse.verifyToken,contactusController.getcontactusbyid);
+router.get('/:id',contactusController.getcontactusbyid);
 /**
 * @swagger
 * /api/v1/contactusController/{id}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - contactus
 *     description: get a single contactus
