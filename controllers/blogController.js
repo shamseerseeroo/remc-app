@@ -174,6 +174,7 @@ exports.deleteblog = async (req, res, next) => {
           .then(function (list) {
             console.log(list)
             list.filter(data=>{
+              console.log(data)
               data.Image = config.api.BASE_URL+ "blog/" + data.Image;
               data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
             })
@@ -218,9 +219,11 @@ exports.deleteblog = async (req, res, next) => {
       status: true
   }).populate('client')
   .then(function (list) {
+       
          list.filter(data=>{
-      data.Image = config.api.BASE_URL+ "blog/" + data.Image;
+      data.Image = config.api.BASE_URL+ "blog/" + data.Image; 
       data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
+      console.log(data)
       })
       res.json({
           status: "success",

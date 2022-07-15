@@ -6,7 +6,7 @@ const contactusdata = require('./contactus.routes')
 const clientlistingdata  = require("./clientslisting.routes")
 const blogdata  = require("./blog.routes")
 const ourprojects  = require("./ourprojects.routes")
-
+const contactusformdata= require("./contactusform.routes")
 const router = express.Router();
 router.get('/', (req, res) => {
   res.send('TODO API Version 1');
@@ -24,6 +24,7 @@ router.use("/banner",require('./banner.routes.js'))
 router.use("/ourprojects",ourprojects)
 router.use("/career",careersData)
 router.use("/contactus",contactusdata)
+router.use("/contactusform",contactusformdata)
 router.use("/clientlisting",clientlistingdata)
 router.use("/ourteam",require('./ourteam.routes'))
 
