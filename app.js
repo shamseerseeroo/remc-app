@@ -20,7 +20,7 @@ swaggerDoc(app);
 require('express-async-errors');
 
 app.use(express.static("public"));
-//app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads"));
 app.use(express.static("uploads"));
 
  //app.use(express.static(__dirname + '/public'));
