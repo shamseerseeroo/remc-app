@@ -191,13 +191,11 @@ router.get('/:slug',pagesController.getbyslug, middlewareReponse.getByIdResponse
 *       404:
 *         description: page not found
 */ 
-router.get('/id/:id',middlewareReponse.verifyToken,pagesController.getpagebyid);
+router.get('/id/:id',pagesController.getpagebyid);
 /**
 * @swagger
 * /api/v1/pages/id/{id}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - pages
 *     description: get a single page

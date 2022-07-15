@@ -101,7 +101,7 @@ exports.updatecontactusform = async (req, res, next) => {
 //     }
 //   }
 exports.getcontactusform = async (req, res, next) => {
-  const data = await Contactusform.find({ delstatus: false }, (err, result) => {
+  const data = await Contactusform.find((err, result) => {
     console.log(result);
     if (result) {
       const response = {

@@ -186,8 +186,8 @@ exports.deleteblog = async (req, res, next) => {
            }
            for(let data of list)
            {
-             data.Image = config.api.BASE_URL+ "blog/" + data.Image; 
-             data.client.Image= config.api.BASE_URL+ "clientlisting/" + c[i];
+             data.Image = config.api.BASE_URL+ "uploads/blog/" + data.Image; 
+             data.client.Image= config.api.BASE_URL+ "uploads/clientlisting/" + c[i];
              i++
            }     
               
@@ -209,8 +209,8 @@ exports.deleteblog = async (req, res, next) => {
     Blog.findById(req.params.id).populate('client')
     .then((result)=>{
      if(!!result){
-      result.Image = "http://localhost:3000/blog/" + result.Image
-      result.client.Image =  "http://localhost:3000/clientlisting/" + result.client.Image;
+      result.Image = "http://localhost:3000/uploads/blog/" + result.Image
+      result.client.Image =  "http://localhost:3000/uploads/clientlisting/" + result.client.Image;
      }
 
       res.json({
@@ -240,12 +240,13 @@ exports.deleteblog = async (req, res, next) => {
       // })
       for(let item of list)
       {
-        c = [...c, item.client.Image]
+        // c = [...c, item.client.Image]
+        c.push(item?.client?.Image)
       }
       for(let data of list)
       {
-        data.Image = config.api.BASE_URL+ "blog/" + data.Image; 
-        data.client.Image= config.api.BASE_URL+ "clientlisting/" + c[i];
+        data.Image = config.api.BASE_URL+ "uploads/blog/" + data.Image; 
+        data.client.Image= config.api.BASE_URL+ "uploads/clientlisting/" + c[i];
         i++
       }
       res.json({

@@ -158,13 +158,11 @@ router.get('/',upload.single('Image'),middlewareReponse.verifyToken,ourteamContr
  *       400:
  *         description: Invalid status value 
  */
-router.get('/:id',middlewareReponse.verifyToken,ourteamController.getourteambyid);
+router.get('/:id',ourteamController.getourteambyid);
 /**
 * @swagger
 * /api/v1/ourteam/{id}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - ourteam
 *     description: get a single ourteam

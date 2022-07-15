@@ -175,7 +175,6 @@ router.get('/id/:id',servicemanagmentController.getservicebyid);
 * @swagger
 * /api/v1/service/{slug}: 
 *   get:
-
 *     tags:
 *       - service
 *     description: get a single slug
