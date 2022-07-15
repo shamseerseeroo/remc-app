@@ -170,13 +170,12 @@ router.get('/',upload.single('Image'),middlewareReponse.verifyToken,servicemanag
  *       400:
  *         description: Invalid status value 
  */
-router.get('/id/:id',middlewareReponse.verifyToken,servicemanagmentController.getservicebyid);
+router.get('/id/:id',servicemanagmentController.getservicebyid);
 /**
 * @swagger
 * /api/v1/service/{slug}: 
 *   get:
-*     security:           
-*       - Bearer: []
+
 *     tags:
 *       - service
 *     description: get a single slug
