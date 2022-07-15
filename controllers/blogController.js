@@ -230,12 +230,24 @@ exports.deleteblog = async (req, res, next) => {
       status: true
   }).populate('client')
   .then(function (list) {
-       
-         list.filter(data=>{
-      data.Image = config.api.BASE_URL+ "blog/" + data.Image; 
-      data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
-      console.log(data)
-      })
+       let b = []
+       let i = 0;
+       let c = []
+      //    list.filter(data=>{
+      // data.Image = config.api.BASE_URL+ "blog/" + data.Image; 
+      // data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
+      // console.log(data)
+      // })
+      for(let item of list)
+      {
+        c = [...c, item.client.Image]
+      }
+      for(let data of list)
+      {
+        data.Image = config.api.BASE_URL+ "blog/" + data.Image; 
+        data.client.Image= config.api.BASE_URL+ "clientlisting/" + c[i];
+        i++
+      }
       res.json({
           status: "success",
           message: "testimonial retrieved successfully",
