@@ -168,13 +168,11 @@ router.get('/',upload.single('Image'),middlewareReponse.verifyToken,ourprojectsC
  *       400:
  *         description: Invalid status value 
  */
-router.get('/:id',middlewareReponse.verifyToken,ourprojectsController.getourprojectsbyid);
+router.get('/:id',ourprojectsController.getourprojectsbyid);
 /**
 * @swagger
 * /api/v1/ourprojects/{id}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - ourprojects
 *     description: get a single ourprojects

@@ -4,13 +4,13 @@ var { Schema } = mongoose;
 var contactusformSchema = new Schema(
   {
     Name: {
-        type: 'string'
+        type: String
       },
     Email: {
-      type: 'string'
+      type: String
     },
     phonenumber: {
-      type: 'string'
+      type: Number
     },
     subject: {
       type: String

@@ -174,9 +174,23 @@ exports.deleteblog = async (req, res, next) => {
           .then(function (list) {
             console.log(list)
             list.filter(data=>{
-              console.log(data)
-              data.Image = config.api.BASE_URL+ "blog/" + data.Image;
-              data.client.Image= config.api.BASE_URL+ "clientlisting/" + data.client.Image;
+              let appliedclient = [];
+
+              for(let data of list) {
+              
+              data.Image = config.api.BASE_URL+ "uploads/blog/" + data.Image;
+              
+              if(!appliedclient.includes(data.client._id))
+              
+              {
+              
+              data.client.Image = config.api.BASE_URL+ "uploads/clientlisting/" +data.client.Image;
+              
+              appliedclient.push(data.client._id);
+              
+              }
+              
+              }
             })
               res.json({
                   status: "success",
@@ -192,27 +206,24 @@ exports.deleteblog = async (req, res, next) => {
           })
     };
   exports.getblogbyid= async (req,res,next) => {
-    const blogedata = await Blog.findOne({ _id: req.params.id }, (err, result) => {
-     
-      console.log(result)
+    Blog.findById(req.params.id).populate('client')
+    .then((result)=>{
+     if(!!result){
       result.Image = "http://localhost:3000/blog/" + result.Image
-      console.log(result.Image)
-      console.log(result)
-      if (err) {
-        consosle.log(err)
-        res.json({
-          status: "error",
-          message: err,
-        });
-      } else {
-        res.json({
-          status: "success",
-          message: 'blog details loading..',
-          data: result
-        });
-      }
+      result.client.Image =  "http://localhost:3000/client/" + result.client.Image;
+     }
+
+      res.json({
+        status: "success",
+        message: 'blog details loading..',
+        data: result
+      });
     })
-  }        
+    
+    }
+ 
+
+        
   exports.getblogstatus= async (req,res, next)=>{
     Blog.find({
       delstatus: false,
