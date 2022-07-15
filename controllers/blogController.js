@@ -210,7 +210,7 @@ exports.deleteblog = async (req, res, next) => {
     .then((result)=>{
      if(!!result){
       result.Image = "http://localhost:3000/blog/" + result.Image
-      result.client.Image =  "http://localhost:3000/client/" + result.client.Image;
+      result.client.Image =  "http://localhost:3000/clientlisting/" + result.client.Image;
      }
 
       res.json({
