@@ -155,7 +155,7 @@ exports.deleteclientlisting = async (req, res, next) => {
 exports.getclientlistingbyid = async (req, res, next) => {
   const clientlistingdata = await clientlistingModel.findOne({ _id: req.params.id }, (err, result) => {
                                                                                   
-    result.Image = "http://localhost:3000/clientlisting/" + result.Image
+    result.Image = "http://localhost:3000/uploads/clientlisting/" + result.Image
     console.log(result.Image)
     console.log(result)
     if (err) {
@@ -174,20 +174,27 @@ exports.getclientlistingbyid = async (req, res, next) => {
   })
 }
 exports.getclientlisting = async (req, res, next) => {
-  const data = await clientlistingModel.find({ delstatus: false }, (err, result) => {
-    console.log(result);
-    if (result) {
-      const response = {
-        data: result
-      };
-      res.data = response;
-
-      return next();
-    } else {
-      debug('Error occured while fetching all pages');
-      throw new Error();
-    }
-  })
+  clientlistingModel.find({
+    delstatus: false
+}).sort({
+    sortorder: 1
+})
+.then(function (list) {
+  for(i=0;i<list.length;i++){
+    list[i].Image="http://localhost:3000/uploads/clientlisting/" + list[i].Image
+   }
+    res.json({
+        status: "success",
+        message: "testimonial retrieved successfully",
+        data: list
+    });
+})
+.catch((err) => {
+    res.json({
+        status: "error",
+        message: err,
+    });
+})
 }
 exports.getclientlistingstatus= async (req,res, next)=>{
   console.log("status")
@@ -199,7 +206,7 @@ exports.getclientlistingstatus= async (req,res, next)=>{
 .then(function (list) {
    console.log(list)
    list.filter(data=>{
-    data.Image = config.api.BASE_URL+ "clientlisting/" + data.Image;
+    data.Image = config.api.BASE_URL+ "uploads/clientlisting/" + data.Image;
     })
     res.json({
         status: "success",

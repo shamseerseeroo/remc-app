@@ -188,7 +188,7 @@ exports.getpagebyid = async (req, res, next) => {
   const pagesdata = await pages.findOne({ _id: req.params.id }, (err, result) => {
 
     console.log(result.Image)
-    result.Image = "http://localhost:3000/pages/" + result.Image
+    result.Image = "http://localhost:3000/uploads/pages/" + result.Image
     console.log(result.Image)
     console.log(result)
     if (err) {
@@ -213,7 +213,7 @@ exports.getbyslug = async (req, res, next) => {
   })
     .then(function (data) {
       
-        data.Image = config.api.BASE_URL+ "pages/" + data.Image;
+        data.Image = config.api.BASE_URL+ "uploads/pages/" + data.Image;
       
       res.json({
         status: "success",
@@ -236,7 +236,7 @@ exports.getpagesstatus= async (req,res, next)=>{
 })
 .then(function (list) {
   list.filter(data=>{
-    data.Image = config.api.BASE_URL+ "pages/" + data.Image;
+    data.Image = config.api.BASE_URL+ "uploads/pages/" + data.Image;
     })
     res.json({
         status: "success",

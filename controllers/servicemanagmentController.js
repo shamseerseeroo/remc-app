@@ -151,7 +151,7 @@ exports.getservicebyid = async (req, res, next) => {
   console.log("hii")
   const servicedata = await servicemanagment.findOne({ _id: req.params.id }, (err, result) => {
     console.log(result.Image)
-    result.Image = "http://localhost:3000/service/" + result.Image
+    result.Image = "http://localhost:3000/uploads/service/" + result.Image
     console.log(result.Image)
     console.log(result)
     if (err) {
@@ -210,7 +210,7 @@ exports.getservicestatus= async (req,res, next)=>{
 .then(function (list) {
   console.log(list)
   list.filter(data=>{
-    data.Image = config.api.BASE_URL+ "service/" + data.Image;
+    data.Image = config.api.BASE_URL+ "uploads/service/" + data.Image;
     })
     res.json({
         status: "success",

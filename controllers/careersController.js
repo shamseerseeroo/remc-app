@@ -160,6 +160,9 @@ exports.deletecareer = async (req, res, next) => {
               sortorder: 1
           })
           .then(function (list) {
+            for(i=0;i<list.length;i++){
+              list[i].Image="http://localhost:3000/uploads/career/" + list[i].Image
+             }
               res.json({
                   status: "success",
                   message: "testimonial retrieved successfully",
@@ -178,7 +181,7 @@ exports.deletecareer = async (req, res, next) => {
     const careersedata = await Careers.findOne({ _id: req.params.id }, (err, result) => {
      
       console.log(result)
-      result.Image = "http://localhost:3000/careers/" + result.Image
+      result.Image = "http://localhost:3000/uploads/careers/" + result.Image
       console.log(result.Image)
       console.log(result)
       if (err) {
@@ -204,7 +207,7 @@ exports.deletecareer = async (req, res, next) => {
   })
   .then(function (list) {
     list.filter(data=>{
-      data.Image = config.api.BASE_URL+ "careers/" + data.Image;
+      data.Image = config.api.BASE_URL+ "uploads/careers/" + data.Image;
       })
       res.json({
           status: "success",

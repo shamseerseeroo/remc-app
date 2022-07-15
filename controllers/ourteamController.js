@@ -169,7 +169,7 @@ exports.getourteambyid = async (req, res, next) => {
 
     console.log(result.Image)
     console.log(result.Image)
-    result.Image = "http://localhost:3000/ourteam/" + result.Image
+    result.Image = "http://localhost:3000/uploads/ourteam/" + result.Image
     console.log(result)
     if (err) {
       consosle.log(err)
@@ -194,7 +194,7 @@ exports.getourteamsstatus= async (req,res, next)=>{
 })
 .then(function (list) {
   list.filter(data=>{
-    data.Image = config.api.BASE_URL+ "ourteam/" + data.Image;
+    data.Image = config.api.BASE_URL+ "uploads/ourteam/" + data.Image;
     })
     res.json({
         status: "success",

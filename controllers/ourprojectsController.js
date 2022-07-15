@@ -168,7 +168,7 @@ exports.getourprojectsbyid = async (req, res, next) => {
 
     console.log(result.Image)
     console.log(result.Image)
-    result.Image = "http://localhost:3000/ourprojects/" + result.Image
+    result.Image = "http://localhost:3000/uploads/ourprojects/" + result.Image
     console.log(result)
     if (err) {
       consosle.log(err)
@@ -193,7 +193,7 @@ exports.getourprojectsstatus= async (req,res, next)=>{
 })
 .then(function (list) {
   list.filter(data=>{
-    data.Image = config.api.BASE_URL+ "ourprojects/" + data.Image;
+    data.Image = config.api.BASE_URL+ "uploads/ourprojects/" + data.Image;
     })
     res.json({
         status: "success",

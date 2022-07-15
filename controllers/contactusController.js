@@ -178,7 +178,7 @@ exports.getcontactusstatus= async (req,res, next)=>{
 })
 .then(function (list) {
   list.filter(data=>{
-    data.Image = config.api.BASE_URL+ "contactus/" + data.Image;
+    data.Image = config.api.BASE_URL+ "uploads/contactus/" + data.Image;
     })
     res.json({
         status: "success",

@@ -166,6 +166,10 @@ exports.deletebanner = async (req, res, next) => {
               sortorder: 1
           })
           .then(function (list) {
+              
+               for(i=0;i<list.length;i++){
+                list[i].Image="http://localhost:3000/uploads/banner/" + list[i].Image
+               }
               res.json({
                   status: "success",
                   message: "testimonial retrieved successfully",
@@ -183,7 +187,7 @@ exports.deletebanner = async (req, res, next) => {
     const bannerdata = await Banner.findOne({ _id: req.params.id }, (err, result) => {
      
       console.log(result)
-      result.Image = "http://localhost:3000/banner/" + result.Image
+      result.Image = "http://localhost:3000/uploads/banner/" + result.Image
       console.log(result.Image)
       console.log(result)
       if (err) {
@@ -209,7 +213,7 @@ exports.deletebanner = async (req, res, next) => {
   })
   .then(function (list) {
     list.filter(data=>{
-      data.Image = config.api.BASE_URL+ "banner/" + data.Image;
+      data.Image = config.api.BASE_URL+ "uploads/banner/" + data.Image;
       })
       res.json({
           status: "success",
