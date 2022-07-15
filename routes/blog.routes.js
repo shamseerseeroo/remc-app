@@ -201,13 +201,11 @@ router.get('/',blogController.getblog, middlewareReponse.getByIdResponse);
  *       400:
  *         description: Invalid status value 
  */
-router.get('/id/:id',middlewareReponse.verifyToken,blogController.getblogbyid);
+router.get('/id/:id',blogController.getblogbyid);
 /**
 * @swagger
 * /api/v1/blog/id/{id}: 
 *   get:
-*     security:           
-*       - Bearer: []
 *     tags:
 *       - blog
 *     description: get a single blog
