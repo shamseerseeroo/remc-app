@@ -15,16 +15,17 @@ var contactusformSchema = new Schema(
     subject: {
       type: String
     },
-    messege:{
+    Message:{
         type: String
-      },
+    },
     createddate: {
       type: Date,
       default: Date.now
     },
-
-
-
+    updateddate: {
+      type: Date,
+      default: null
+    }
 
 
   }

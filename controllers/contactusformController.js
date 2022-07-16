@@ -10,12 +10,13 @@ const config = require('../config/config');
 
 exports.create = async (req, res, next) => {
   console.log("hii");
+  console.log(req.body)
   res.data = await contactusformService.create({
     Name: req.body.Name,
     Email: req.body.Email,
     phonenumber: req.body.phonenumber,
     subject: req.body.subject,
-    messege: req.body.messege
+    Messege: req.body.Message
   });
   if (res.data) {
     console.log(res.data)
@@ -58,7 +59,7 @@ exports.updatecontactusform = async (req, res, next) => {
         updateItem.Email= req.body.Email,
         updateItem.phonenumber= req.body.phonenumber,
         updateItem.subject= req.body.subject,
-        updateItem.messege= req.body.messege
+        updateItem.Message= req.body.Message
 
       updateItem.save((err) => {
 

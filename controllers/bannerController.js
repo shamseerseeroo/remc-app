@@ -80,7 +80,8 @@ exports.updatebanner = async (req, res, next) => {
         }
         updateItem.sortorder = req.body.sortorder;
         updateItem.createdby = req.body.email
-        updateItem.sttaus = req.body.status
+        updateItem.status = req.body.status
+        updateItem.description = req.body.description
         updateItem.buttonurl = req.body.buttonurl ,
         updateItem.buttontext = req.body.buttontext 
       
