@@ -11,6 +11,10 @@ const config = require('../config/config');
 exports.create = async (req, res, next) => {
  
   res.data = await contactusService.create({
+    title: req.body.title,
+    description:req.body.description,
+    quote:req.body.quote,
+    mapcordinates:req.body.mapcordinates,
     email: req.body.email,
     phonenumber: req.body.phonenumber,
     address: req.body.address
@@ -54,6 +58,10 @@ exports.updatecontactus = async (req, res, next) => {
     } else {
       updateItem.email = req.body.email;
       updateItem.phonenumber = req.body.phonenumber;
+      updateItem.title=req.body.title
+      updateItem.description=req.body.description
+      updateItem.quote=req.body.quote
+      updateItem.mapcordinates=req.body.mapcordinates
       updateItem.updateddate = new Date();
       updateItem.address = req.body.address
 

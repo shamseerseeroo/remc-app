@@ -13,13 +13,20 @@ const middlewareResponse = require('../middleware/response');
  * definitions:
  *   contactus:
  *     properties:
+ *       title:
+ *         type: string
+ *       description:
+ *         type: string
+ *       address:
+ *         type: string
  *       email:
  *         type: string
  *       phonenumber:
  *         type: string
- *       address:
+ *       quote:
  *         type: string
- *       
+ *       mapcordinates:
+ *         type: Array       
  *        
  */
 //create
@@ -78,7 +85,7 @@ router.put('/:id',middlewareResponse.verifyToken,contactusController.updateconta
 router.delete('/:id', middlewareResponse.verifyToken,contactusController.deletecontactus, middlewareResponse.deleteResponse);
   /**
  * @swagger
- * /api/v1//{id}: 
+ * /api/v1/contactus/{id}: 
  *   delete:
 *     security:           
  *       - Bearer: []

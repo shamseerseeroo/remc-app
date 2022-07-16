@@ -1,16 +1,27 @@
+const { array } = require('mongoose/lib/utils');
+
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var { Schema } = mongoose;
 
 var contactusSchema = new Schema(
   {
-
+    title: {
+      type: 'string'
+    },  
+    description: {
+      type: 'string'
+    },
+    quote: {
+      type: 'string'
+    },
+    mapcordinates: {
+      type: Array
+    },
     email: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
     phonenumber: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
     address: {
       type: String
