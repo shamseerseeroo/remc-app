@@ -151,6 +151,9 @@ exports.getourteam = (req, res) => {
             sortorder: 1
         })
         .then(function (list) {
+          for(i=0;i<list.length;i++){
+            list[i].Image="http://localhost:3000/uploads/ourteam/" + list[i].Image
+           }
             res.json({
                 status: "success",
                 message: "testimonial retrieved successfully",
