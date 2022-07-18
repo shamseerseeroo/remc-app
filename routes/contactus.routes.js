@@ -126,7 +126,7 @@ router.get('/',contactusController.getcontactus, middlewareResponse.getByIdRespo
 router.get('/:id',contactusController.getcontactusbyid);
 /**
 * @swagger
-* /api/v1/contactusController/{id}: 
+* /api/v1/contactus/{id}: 
 *   get:
 *     tags:
 *       - contactus

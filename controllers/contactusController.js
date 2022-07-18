@@ -141,14 +141,12 @@ exports.deletecontactus = async (req, res, next) => {
 //     }
 //   }
 exports.getcontactus = async (req, res, next) => {
-  const data = await Contactus.find({ delstatus: false }, (err, result) => {
+  const data = await Contactus.findOne({ delstatus: false }, (err, result) => {
     console.log(result);
     if (result) {
-      const response = {
-        data: result,
-      };
-      res.data = response;
-
+      console.log(result)
+      res.data = result;
+      
       return next();
     } else {
       debug('Error occured while fetching all pages');
@@ -161,8 +159,6 @@ exports.getcontactusbyid = async (req, res, next) => {
   const contactusdata = await Contactus.findOne({_id : req.params.id }, (err, result) => {
     console.log("hiiii")
     
-       
-    console.log(result)
     if (err) {
       console.log("error")
       res.json({        status: "error",
@@ -173,7 +169,7 @@ exports.getcontactusbyid = async (req, res, next) => {
       res.json({
         status: "success",
         message: 'contact details loading..',
-        data: result
+        data: response
       });
     }
   })
@@ -188,10 +184,11 @@ exports.getcontactusstatus= async (req,res, next)=>{
   list.filter(data=>{
     data.Image = config.api.BASE_URL+ "uploads/contactus/" + data.Image;
     })
+    const response = Object.assign({}, list);
     res.json({
         status: "success",
         message: "testimonial retrieved successfully",
-        data: list
+        data: response
     });
 })
 .catch((err) => {
