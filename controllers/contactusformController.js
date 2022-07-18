@@ -19,8 +19,11 @@ exports.create = async (req, res, next) => {
     Messege: req.body.Message
   });
   if (res.data) {
-    console.log(res.data)
-    return next();
+    return res.status(201).json({
+      status: "success",
+      message: "contactus retrieved successfully",
+      data: res.data
+    });
   }
   debug('Error occured while saving  data');
   throw new Error();
@@ -102,20 +105,24 @@ exports.updatecontactusform = async (req, res, next) => {
 //     }
 //   }
 exports.getcontactusform = async (req, res, next) => {
-  const data = await Contactusform.find((err, result) => {
-    console.log(result);
-    if (result) {
-      const response = {
-        data: result,
-      };
-      res.data = response;
-
-      return next();
-    } else {
-      debug('Error occured while fetching all pages');
-      throw new Error();
-    }
-  })
+  Contactusform.find({
+    delstatus: false
+}).sort({
+    sortorder: 1
+})
+.then(function (list) {
+    res.json({
+        status: "success",
+        message: "testimonial retrieved successfully",
+        data: list
+    });
+})
+.catch((err) => {
+    res.json({
+        status: "error",
+        message: err,
+    });
+})
 }
 exports.getcontactusformbyid = async (req, res, next) => {
   console.log(req)
