@@ -18,6 +18,7 @@ router.use("/signup",postdata)
 router.use("/signin", postData);
 router.use("/profile",require('./profile.routes'))
 router.use("/service",require('./servicemanagment.routes'))
+router.use("/gallery",require('./gallery.routes'))
 router.use("/pages",require('./pages.routes.js'))
 router.use("/blog",blogdata)
 router.use("/banner",require('./banner.routes.js'))
