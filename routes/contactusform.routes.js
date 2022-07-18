@@ -19,7 +19,7 @@ const middlewareResponse = require('../middleware/response');
  *         type: string
  *       subject:
  *         type: string
- *       message:
+ *       Message:
  *         type: string
  *       
  *        

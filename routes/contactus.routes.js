@@ -30,13 +30,11 @@ const middlewareResponse = require('../middleware/response');
  *        
  */
 //create
-router.post('/', middlewareResponse.verifyToken, contactusController.create,middlewareResponse.saveResponse);
+router.post('/', contactusController.create,middlewareResponse.saveResponse);
 /**
  * @swagger
  * /api/v1/contactus:
  *   post:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - contactus
  *     description: Creates a new contactus
@@ -54,13 +52,11 @@ router.post('/', middlewareResponse.verifyToken, contactusController.create,midd
  *         description: Successfully created
  */
 //update
-router.put('/:id',middlewareResponse.verifyToken,contactusController.updatecontactus, middlewareResponse.updateResponse);
+router.put('/:id',contactusController.updatecontactus, middlewareResponse.updateResponse);
   /**
  * @swagger
  * /api/v1/contactus/{id}: 
  *   put:
- *     security:           
- *       - Bearer: []
  *     tags:
  *       - contactus
  *     description: Creates a new contactus
@@ -82,13 +78,11 @@ router.put('/:id',middlewareResponse.verifyToken,contactusController.updateconta
  *       200:
  *         description: Successfully created
  */
-router.delete('/:id', middlewareResponse.verifyToken,contactusController.deletecontactus, middlewareResponse.deleteResponse);
+router.delete('/:id', contactusController.deletecontactus, middlewareResponse.deleteResponse);
   /**
  * @swagger
  * /api/v1/contactus/{id}: 
  *   delete:
-*     security:           
- *       - Bearer: []
  *     tags:
  *       - contactus
  *     summary: Deletes a contactus
@@ -110,13 +104,11 @@ router.delete('/:id', middlewareResponse.verifyToken,contactusController.deletec
  *         description: contactus not found   
  * 
  */  
-router.get('/',middlewareResponse.verifyToken,contactusController.getcontactus, middlewareResponse.getByIdResponse);
+router.get('/',contactusController.getcontactus, middlewareResponse.getByIdResponse);
 /**
  * @swagger
  * /api/v1/contactus:
  *   get:
- *     security:           
- *       - Bearer: [] 
  *     tags:
  *       - contactus
  *     description: Returns all contactus
