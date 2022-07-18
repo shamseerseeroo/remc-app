@@ -147,16 +147,22 @@ exports.deletecontactus = async (req, res, next) => {
 //     }
 //   }
 exports.getcontactus = async (req, res, next) => {
-  const data = await Contactus.findOne({ delstatus: false }, (err, result) => {
-    console.log(result);
-    if (result) {
-      console.log(result)
-      res.data = result;
-      
-      return next();
+  const contactusdata = await Contactus.findOne( (err, result) => {
+
+    
+    console.log(result)
+    if (err) {
+      consosle.log(err)
+      res.json({
+        status: "error",
+        message: err,
+      });
     } else {
-      debug('Error occured while fetching all pages');
-      throw new Error();
+      res.json({
+        status: "success",
+        message: 'contactus details loading..',
+        data: result
+      });
     }
   })
 }
