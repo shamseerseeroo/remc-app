@@ -20,11 +20,17 @@ exports.create = async (req, res, next) => {
     address: req.body.address
   });
   if (res.data) {
-    console.log(res.data)
-    return next();
+   
+      return res.status(201).json({
+        status: "success",
+        message: "contactus retrieved successfully",
+        data: res.data
+      });
+  } else {
+    return res.status(400).json({
+      status: "error"
+    });
   }
-  debug('Error occured while saving  data');
-  throw new Error();
 }
 // exports.create = async (req, res) => {
 
@@ -169,7 +175,7 @@ exports.getcontactusbyid = async (req, res, next) => {
       res.json({
         status: "success",
         message: 'contact details loading..',
-        data: response
+        data: result
       });
     }
   })
